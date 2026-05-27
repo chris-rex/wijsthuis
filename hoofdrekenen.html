@@ -293,6 +293,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   <div style="width:100%">
     <div class="section-label">Groep bekijken</div>
     <div class="group-grid" id="prog-group-grid"></div>
+    <div class="op-grid" id="prog-op-grid" style="margin-top:.6rem"></div>
   </div>
   <div class="prog-grid-wrap">
     <div class="pg" id="prog-grid"></div>
@@ -648,8 +649,8 @@ function renderOpGrid(){
   g.options.forEach(opt=>{const chip=document.createElement('button');chip.className='op-chip'+(sel.includes(opt.id)?' sel':'');chip.textContent=opt.label;chip.onclick=()=>{let cur=[...(profile.groupSel[currentGroup]||[...g.defaultSel])];if(cur.includes(opt.id)){if(cur.length===1)return;cur=cur.filter(x=>x!==opt.id)}else cur.push(opt.id);profile.groupSel[currentGroup]=cur;currentSel=cur;saveProfiles();renderOpGrid()};grid.appendChild(chip)})
 }
 
-function renderProgressGrid(g){
-  const sel=profile.groupSel[g]||GROUPS[g].defaultSel;
+function renderProgressGrid(g,sel){
+  if(!sel)sel=profile.groupSel[g]||GROUPS[g].defaultSel;
   const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
   const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
   pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<2000&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<3500&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
@@ -662,8 +663,26 @@ function renderProgressScreen(){
     <div class="level-card"><div class="level-icon">👍</div><div class="level-name">Goed</div><div class="level-count">${goed}</div></div>
     <div class="level-card"><div class="level-icon">🏆</div><div class="level-name">Uitstekend</div><div class="level-count">${uitstekend}</div></div>`;
   const pg=document.getElementById('prog-group-grid');pg.innerHTML='';
-  Object.keys(GROUPS).forEach(g=>{const n=Number(g),info=GROUPS[n];const btn=document.createElement('button');btn.className='group-btn';btn.innerHTML=`<div class="gb-num">Gr.${n}</div><div class="gb-sub">${info.sub}</div>`;btn.onclick=()=>renderProgressGrid(n);pg.appendChild(btn)});
-  renderProgressGrid(currentGroup);
+  let progSel=profile.groupSel[currentGroup]||GROUPS[currentGroup].defaultSel;
+  function renderProgOps(g){
+    const opWrap=document.getElementById('prog-op-grid');opWrap.innerHTML='';
+    const opts=GROUPS[g].options;
+    opts.forEach(opt=>{
+      const chip=document.createElement('button');chip.className='op-chip'+(progSel.includes(opt.id)?' sel':'');
+      chip.textContent=opt.label;
+      chip.onclick=()=>{
+        if(progSel.includes(opt.id)){if(progSel.length===1)return;progSel=progSel.filter(x=>x!==opt.id)}
+        else progSel=[...progSel,opt.id];
+        opWrap.querySelectorAll('.op-chip').forEach(c=>c.classList.remove('sel'));
+        progSel.forEach(id=>{const c=[...opWrap.querySelectorAll('.op-chip')].find(c=>c.textContent===opts.find(o=>o.id===id)?.label);if(c)c.classList.add('sel')});
+        renderProgressGrid(g,progSel);
+      };
+      opWrap.appendChild(chip);
+    });
+  }
+  Object.keys(GROUPS).forEach(g=>{const n=Number(g),info=GROUPS[n];const btn=document.createElement('button');btn.className='group-btn'+(n===currentGroup?' sel':'');btn.innerHTML=`<div class="gb-num">Gr.${n}</div><div class="gb-sub">${info.sub}</div>`;btn.onclick=()=>{progSel=profile.groupSel[n]||GROUPS[n].defaultSel;pg.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');renderProgOps(n);renderProgressGrid(n,progSel)};pg.appendChild(btn)});
+  renderProgOps(currentGroup);
+  renderProgressGrid(currentGroup,progSel);
   const sl=document.getElementById('session-list');sl.innerHTML='';
   const sessions=profile.sessions||[];
   if(!sessions.length){sl.innerHTML='<div style="text-align:center;color:var(--text2);font-size:.85rem;padding:.75rem">Nog geen sessies gespeeld</div>';return}
