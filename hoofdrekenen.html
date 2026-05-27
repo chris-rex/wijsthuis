@@ -440,7 +440,7 @@ function loadProfiles(){try{return JSON.parse(localStorage.getItem('hr_profiles'
 function saveProfiles(){localStorage.setItem('hr_profiles',JSON.stringify(profiles))}
 function loadSettings(){try{return JSON.parse(localStorage.getItem('hr_settings'))||defSettings()}catch{return defSettings()}}
 function saveSettings(){localStorage.setItem('hr_settings',JSON.stringify(settings))}
-function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark',tAuto:5,tGoed:8}}
+function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark',tAuto:5,tGoed:8,age:'jong'}}
 function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus','min','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[]}}
 
 let profiles=loadProfiles(),settings=loadSettings();
