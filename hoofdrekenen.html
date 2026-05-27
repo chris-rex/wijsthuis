@@ -30,7 +30,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .profile-info{flex:1;min-width:0}
 .profile-name{font-size:.95rem;font-weight:600;color:var(--text)}
 .profile-detail{font-size:.72rem;color:var(--text2);margin-top:1px}
-.profile-delete{background:none;border:none;cursor:pointer;color:var(--text3);font-size:1rem;padding:.25rem;border-radius:8px}
 .add-profile-btn{width:100%;background:none;border:1.5px dashed var(--border);border-radius:16px;padding:.85rem;font-size:.9rem;font-weight:600;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .15s}
 .add-profile-btn:hover{border-color:var(--accent);color:var(--accent)}
 
@@ -113,8 +112,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .np:active{background:var(--surface2);transform:scale(.93)}
 .np.np-del{font-size:1rem;color:var(--text2)}
 .np.np-ok{background:var(--accent);color:#fff;border-color:transparent;font-size:.9rem;font-weight:600}
-
-/* CHOICES */
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;padding:0 1.5rem}
 .choice-btn{background:var(--surface);border:2px solid var(--border);border-radius:20px;padding:0;font-size:1.5rem;font-weight:700;cursor:pointer;text-align:center;color:var(--text);box-shadow:var(--shadow);transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%;aspect-ratio:1.2/1;display:flex;align-items:center;justify-content:center}
 .choice-btn:active{transform:scale(.95)}
@@ -138,16 +135,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 /* PROGRESS */
 #progress-screen{gap:1.25rem;padding:2rem 1rem}
 .prog-grid-wrap{background:var(--surface);border-radius:18px;border:1px solid var(--border);padding:1rem;box-shadow:var(--shadow-sm);width:100%}
-.pg{display:grid;gap:3px;width:100%}
+.pg{display:grid;gap:4px;width:100%}
 .pc{border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;color:rgba(255,255,255,.85);padding:2px;text-align:center;line-height:1.2;min-height:32px}
 .prog-legend{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.75rem}
 .leg-item{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--text2)}
 .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.level-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;width:100%}
-.level-card{background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:.75rem .5rem;text-align:center;box-shadow:var(--shadow-sm)}
-.level-icon{font-size:1.4rem}
-.level-name{font-size:.72rem;font-weight:600;margin-top:3px;color:var(--text2)}
-.level-count{font-size:1.2rem;font-weight:700;color:var(--text)}
 .session-list{display:flex;flex-direction:column;gap:.45rem;width:100%;max-height:260px;overflow-y:auto}
 .session-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.7rem 1rem;box-shadow:var(--shadow-sm)}
 .session-top{display:flex;justify-content:space-between;align-items:center}
@@ -160,7 +152,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .session-level.uitstekend{background:rgba(48,209,88,.12);color:var(--green)}
 
 /* SETTINGS */
-#settings-screen{gap:1.5rem;padding:2rem 1rem}
 .settings-group{width:100%;background:var(--surface);border-radius:18px;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm)}
 .setting-row{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.1rem;border-bottom:1px solid var(--border);gap:.5rem}
 .setting-row:last-child{border-bottom:none}
@@ -197,9 +188,9 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   <div class="profile-list" id="profile-list"></div>
   <button class="add-profile-btn" onclick="openNewProfile()">＋ Nieuw profiel aanmaken</button>
   <button id="delete-mode-btn" class="danger-btn" style="font-size:.9rem;padding:.6rem 0;width:100%;text-align:center" onclick="toggleDeleteMode()">Profiel verwijderen</button>
-  <div id="delete-confirm-wrap" style="display:none;width:100%;margin-top:.5rem">
-    <button class="btn-primary" style="background:var(--red);width:100%" onclick="confirmDelete()">Verwijder geselecteerde profiel</button>
-    <button class="btn-secondary" style="margin-top:.4rem;width:100%" onclick="cancelDeleteMode()">Annuleer</button>
+  <div id="delete-confirm-wrap" style="display:none;width:100%;display:flex;flex-direction:column;gap:.4rem">
+    <button class="btn-primary" style="background:var(--red)" onclick="confirmDelete()">Verwijder geselecteerde profiel</button>
+    <button class="btn-secondary" onclick="cancelDeleteMode()">Annuleer</button>
   </div>
 </div>
 
@@ -212,8 +203,6 @@ input:checked+.tog-track:before{transform:translateX(20px)}
     <div class="home-title">Hoofdrekenen</div>
     <div class="home-sub">Snel en zeker — één som per keer</div>
   </div>
-  <div id="progress-stats" style="width:100%"></div>
-
   <div style="width:100%">
     <div class="section-label">Groep</div>
     <div class="group-grid" id="group-grid"></div>
@@ -275,7 +264,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   <div class="stat-row">
     <div class="stat"><div class="stat-num" id="r-correct">—</div><div class="stat-label">Goed</div></div>
     <div class="stat"><div class="stat-num" id="r-time">—</div><div class="stat-label">Gem. tijd</div></div>
-    <div class="stat"><div class="stat-num" id="r-speed">—</div><div class="stat-label">Onder 2s</div></div>
+    <div class="stat"><div class="stat-num" id="r-speed">—</div><div class="stat-label">Onder doel</div></div>
   </div>
   <div class="improved-badge" id="r-improved" style="display:none"></div>
   <div class="btn-stack">
@@ -288,34 +277,42 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 <!-- PROGRESS -->
 <div id="progress-screen" class="screen">
   <div class="screen-title" style="margin-bottom:1rem">Voortgang</div>
+
+  <div id="progress-stats" style="width:100%"></div>
+
   <div style="width:100%">
     <div class="section-label">Niveau per groep</div>
     <div style="display:flex;flex-direction:column;gap:.5rem" id="level-row"></div>
   </div>
+
   <div style="width:100%">
     <div class="section-label">Groep bekijken</div>
     <div class="group-grid" id="prog-group-grid"></div>
     <div class="op-grid" id="prog-op-grid" style="margin-top:.6rem"></div>
   </div>
+
   <div class="prog-grid-wrap">
     <div class="pg" id="prog-grid"></div>
     <div class="prog-legend">
       <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Langzaam</div>
       <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>Oefenen</div>
       <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Automatisch</div>
-      <div class="leg-item"><div class="leg-dot" style="background:var(--border)"></div>Nieuw</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--surface2)"></div>Nieuw</div>
     </div>
   </div>
+
   <div style="width:100%">
     <div class="section-label">Sessie geschiedenis</div>
     <div class="session-list" id="session-list"></div>
   </div>
+
   <button class="btn-secondary" onclick="showScreen('home')" style="margin-top:.5rem">Terug</button>
 </div>
 
 <!-- SETTINGS -->
 <div id="settings-screen" class="screen" style="gap:1.5rem;padding:2rem 1rem">
   <div class="screen-title">Instellingen</div>
+
   <div class="settings-group">
     <div class="setting-row">
       <div class="setting-left"><div class="setting-label">Weergave</div></div>
@@ -325,6 +322,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
       </div>
     </div>
   </div>
+
   <div class="settings-group">
     <div class="setting-row">
       <div class="setting-left"><div class="setting-label">Stopwatch</div><div class="setting-sub">Oplopende tijd per som</div></div>
@@ -343,6 +341,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
       </div>
     </div>
   </div>
+
   <div class="settings-group">
     <div class="setting-row">
       <div class="setting-left"><div class="setting-label">Sommen per sessie</div></div>
@@ -365,10 +364,11 @@ input:checked+.tog-track:before{transform:translateX(20px)}
       <label class="toggle"><input type="checkbox" id="set-sound"><span class="tog-track"></span></label>
     </div>
   </div>
+
   <div class="settings-group">
     <div class="setting-row">
       <div class="setting-left"><div class="setting-label">Leeftijd</div><div class="setting-sub">Past tijdsgrenzen automatisch aan</div></div>
-      <div style="display:flex;gap:.4rem;flex-shrink:0">
+      <div class="theme-toggle">
         <button class="th-btn" id="age-jong" onclick="setAge('jong')">5–7</button>
         <button class="th-btn" id="age-mid" onclick="setAge('mid')">8–10</button>
         <button class="th-btn" id="age-oud" onclick="setAge('oud')">11–12</button>
@@ -390,10 +390,15 @@ input:checked+.tog-track:before{transform:translateX(20px)}
         <button class="step-btn" onclick="stepVal('tGoed',1,2,15)">+</button>
       </div>
     </div>
-  </div><div class="setting-sub">Alleen voor huidig profiel</div></div>
+  </div>
+
+  <div class="settings-group">
+    <div class="setting-row">
+      <div class="setting-left"><div class="setting-label">Voortgang wissen</div><div class="setting-sub">Alleen voor huidig profiel</div></div>
       <button class="danger-btn" onclick="clearProgress()">Wis</button>
     </div>
   </div>
+
   <button class="btn-secondary" onclick="showScreen('home')">Terug</button>
 </div>
 
@@ -411,9 +416,11 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 </div>
 </div>
 
+<input id="hidden-input" type="number" inputmode="numeric" autocomplete="off" style="position:fixed;opacity:0;pointer-events:none;top:0;left:0;width:1px;height:1px">
+
 <script>
 const GROUPS={
-  2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min'],generate(sel){const op=pf(sel);if(op==='plus'){const a=ri(1,9),b=ri(1,9-a);return{q:`${a} + ${b}`,a:a+b}}const a=ri(2,10),b=ri(1,a);return{q:`${a} − ${b}`,a:a-b}}},
+  2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min'],generate(sel){const op=pf(sel);if(op==='plus'){const a=ri(1,8),b=ri(1,9-a);return{q:`${a} + ${b}`,a:a+b}}const a=ri(2,10),b=ri(1,a-1);return{q:`${a} − ${b}`,a:a-b}}},
   3:{sub:'Tot 20',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'},{id:'dub',label:'Dubbelen'}],defaultSel:['plus','min'],generate(sel){const op=pf(sel);if(op==='dub'){const a=ri(2,10);return{q:`${a} + ${a}`,a:2*a}}if(op==='plus'){const a=ri(2,15),b=ri(2,20-a);return{q:`${a} + ${b}`,a:a+b}}const a=ri(5,20),b=ri(2,a-1);return{q:`${a} − ${b}`,a:a-b}}},
   4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus','min','t2','t5','t10'],generate(sel){const op=pf(sel);if(op==='plus'){const a=ri(10,80),b=ri(5,99-a);return{q:`${a} + ${b}`,a:a+b}}if(op==='min'){const a=ri(20,99),b=ri(5,a-1);return{q:`${a} − ${b}`,a:a-b}}const t=parseInt(op.slice(1));const a=ri(1,10);return{q:`${a} × ${t}`,a:a*t}}},
   5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),defaultSel:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],generate(sel){const op=pf(sel);const t=parseInt(op.slice(1));const a=ri(1,10);if(Math.random()<.4)return{q:`${a*t} ÷ ${t}`,a:a};return{q:`${a} × ${t}`,a:a*t}}},
@@ -441,22 +448,21 @@ let activeProfileId=localStorage.getItem('hr_active')||null;
 let profile=null,currentGroup=2,currentSel=[];
 
 function gk(g,q){return`${g}::${q}`}
-function gp(g,q){return profile.progress[gk(g,q)]||{count:0,correct:0,times:[]}}
 function upProgress(g,q,ok,ms){const k=gk(g,q),p=profile.progress[k]||{count:0,correct:0,times:[]};p.count++;if(ok)p.correct++;p.times.push(ms);if(p.times.length>10)p.times=p.times.slice(-10);profile.progress[k]=p;saveProfiles()}
-function avgT(g,q){const p=gp(g,q);if(!p.times.length)return 9999;return p.times.reduce((a,b)=>a+b,0)/p.times.length}
 function clearProgress(){if(confirm('Voortgang wissen voor '+profile.name+'?')){profile.progress={};profile.sessions=[];saveProfiles()}}
 
 function getResultMsg(pct,nC,total,avgMs){
   const s=Math.floor(avgMs/1000);
-  if(pct===1){if(s<2)return{emoji:'🏆',title:'Perfecte score!',msg:`Alle ${total} sommen goed én razendsnel! Jij bent een echte rekenster. Dit is topsport!`}
+  if(pct===1){if(s<(settings.tAuto||5))return{emoji:'🏆',title:'Perfecte score!',msg:`Alle ${total} sommen goed én razendsnel! Jij bent een echte rekenster!`}
   return{emoji:'🌟',title:'Perfecte score!',msg:`Alle ${total} sommen goed! Dat is geweldig. Probeer de volgende keer nog sneller te zijn!`}}
-  if(pct>=.9)return{emoji:'🎉',title:'Bijna perfect!',msg:`Wauw, ${nC} van de ${total} goed! Je bent er bijna. Nog een beetje oefenen en je haalt die laatste er ook uit!`}
-  if(pct>=.75)return{emoji:'💪',title:'Goed bezig!',msg:`${nC} van de ${total} goed, dat is een mooie score. Je maakt duidelijk vooruitgang — ga zo door!`}
-  if(pct>=.5)return{emoji:'📈',title:'Lekker geoefend!',msg:`${nC} van de ${total} goed. Herhaling is de sleutel — elke sessie word je beter. Je bent goed op weg!`}
-  return{emoji:'🌱',title:'Goed geprobeerd!',msg:`${nC} van de ${total} goed. Geen zorgen — iedereen begint ergens. Blijf oefenen, dan gaat het vanzelf beter!`}
+  if(pct>=.9)return{emoji:'🎉',title:'Bijna perfect!',msg:`Wauw, ${nC} van de ${total} goed! Je bent er bijna!`}
+  if(pct>=.75)return{emoji:'💪',title:'Goed bezig!',msg:`${nC} van de ${total} goed, dat is een mooie score. Ga zo door!`}
+  if(pct>=.5)return{emoji:'📈',title:'Lekker geoefend!',msg:`${nC} van de ${total} goed. Elke sessie word je beter!`}
+  return{emoji:'🌱',title:'Goed geprobeerd!',msg:`${nC} van de ${total} goed. Blijf oefenen, dan gaat het vanzelf beter!`}
 }
 function sessionLevel(pct){if(pct>=.9)return{label:'Uitstekend',cls:'uitstekend'};if(pct>=.7)return{label:'Goed',cls:'goed'};return{label:'Beginnend',cls:'begin'}}
 
+// PROFILES
 function renderProfiles(){
   const list=document.getElementById('profile-list');list.innerHTML='';
   profiles.forEach(p=>{
@@ -476,9 +482,23 @@ function selectProfile(id){
   showScreen('home')
 }
 let deleteMode=false,deleteSelectedId=null;
-function toggleDeleteMode(){deleteMode=true;deleteSelectedId=null;document.getElementById('delete-mode-btn').style.display='none';document.getElementById('delete-confirm-wrap').style.display='block';renderProfiles()}
-function cancelDeleteMode(){deleteMode=false;deleteSelectedId=null;document.getElementById('delete-mode-btn').style.display='block';document.getElementById('delete-confirm-wrap').style.display='none';renderProfiles()}
-function toggleDeleteSelect(id,item){deleteSelectedId=id;document.querySelectorAll('.profile-item').forEach(el=>el.style.borderColor='');item.style.borderColor='var(--red)'}
+function toggleDeleteMode(){
+  deleteMode=true;deleteSelectedId=null;
+  document.getElementById('delete-mode-btn').style.display='none';
+  document.getElementById('delete-confirm-wrap').style.display='flex';
+  renderProfiles()
+}
+function cancelDeleteMode(){
+  deleteMode=false;deleteSelectedId=null;
+  document.getElementById('delete-mode-btn').style.display='block';
+  document.getElementById('delete-confirm-wrap').style.display='none';
+  renderProfiles()
+}
+function toggleDeleteSelect(id,item){
+  deleteSelectedId=id;
+  document.querySelectorAll('.profile-item').forEach(el=>el.style.borderColor='');
+  item.style.borderColor='var(--red)'
+}
 function confirmDelete(){
   if(!deleteSelectedId){alert('Selecteer eerst een profiel.');return}
   const p=profiles.find(x=>x.id===deleteSelectedId);if(!p)return;
@@ -491,34 +511,52 @@ function confirmDelete(){
   renderProfiles()
 }
 
+// MODAL
 let selectedEmoji=EMOJIS[0];
 function openNewProfile(){
-  selectedEmoji=EMOJIS[0];document.getElementById('modal-name').value='';
+  selectedEmoji=EMOJIS[0];
+  document.getElementById('modal-name').value='';
   const eg=document.getElementById('emoji-grid');eg.innerHTML='';
-  EMOJIS.forEach(e=>{const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};eg.appendChild(btn)});
-  document.getElementById('modal').classList.add('open');setTimeout(()=>document.getElementById('modal-name').focus(),100)
+  EMOJIS.forEach(e=>{
+    const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;
+    btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};
+    eg.appendChild(btn)
+  });
+  document.getElementById('modal').classList.add('open');
+  setTimeout(()=>document.getElementById('modal-name').focus(),100)
 }
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function saveNewProfile(){
-  const name=document.getElementById('modal-name').value.trim();if(!name)return document.getElementById('modal-name').focus();
+  const name=document.getElementById('modal-name').value.trim();
+  if(!name)return document.getElementById('modal-name').focus();
   const p=defProfile(name,selectedEmoji);profiles.push(p);saveProfiles();closeModal();renderProfiles();selectProfile(p.id)
 }
 document.getElementById('modal-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveNewProfile()});
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
 
-function buildPool(g,sel,size=80){const gen=GROUPS[g].generate,pool=[],seen=new Set();const maxTries=size*20;let tries=0;while(pool.length<size&&tries<maxTries){tries++;const s=gen(sel);if(!seen.has(s.q)){seen.add(s.q);pool.push(s)}}return pool}
+// POOL
+function buildPool(g,sel,size=48){
+  const gen=GROUPS[g].generate,pool=[],seen=new Set();
+  const maxTries=size*20;let tries=0;
+  while(pool.length<size&&tries<maxTries){tries++;const s=gen(sel);if(!seen.has(s.q)){seen.add(s.q);pool.push(s)}}
+  return pool
+}
 function pickW(g,pool){
-  const w=pool.map(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;if(!p.count)return 3;if(avg<2000&&err<.15)return 1;if(avg>4000||err>.4)return 5;return 3});
-  const tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0)return pool[i]}return pool[pool.length-1]
+  const tAuto=(settings.tAuto||5)*1000;
+  const w=pool.map(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;if(!p.count)return 3;if(avg<tAuto&&err<.15)return 1;if(avg>tAuto*2||err>.4)return 5;return 3});
+  const tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;
+  for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0)return pool[i]}
+  return pool[pool.length-1]
 }
 
+// SESSION
 let session={soms:[],idx:0,results:[],somStart:0,sessionStart:0};
 let typedAns='',waitingNext=false,cdTO=null,cdIV=null,swIV=null,audioCtx=null;
 
 function startFromHome(){currentSel=profile.groupSel[currentGroup]||GROUPS[currentGroup].defaultSel;profile.group=currentGroup;saveProfiles();startSession(currentGroup,currentSel)}
 function startSession(g,sel){
   currentGroup=g;currentSel=sel;profile.groupSel[g]=sel;profile.group=g;saveProfiles();
-  const count=settings.sessionCount,pool=buildPool(g,sel,Math.max(count*3,80)),soms=[];
+  const count=settings.sessionCount,pool=buildPool(g,sel,Math.max(count*3,48)),soms=[];
   for(let i=0;i<count;i++)soms.push(pickW(g,pool));
   session={soms,idx:0,results:[],somStart:0,sessionStart:Date.now()};
   typedAns='';waitingNext=false;showScreen('practice');resetSW();buildInputUI();setTimeout(showSom,100)
@@ -543,7 +581,7 @@ function handleInput(ch){
   if(waitingNext||settings.mc)return;
   const s=session.soms[session.idx];
   if(ch==='del'){typedAns=typedAns.slice(0,-1)}
-  else if(ch==='enter'){if(typedAns.length>0)checkTyped(typedAns)}
+  else if(ch==='enter'){if(typedAns.length>0)checkTyped(typedAns);return}
   else{
     if(typedAns.length>=8)return;
     typedAns+=ch;
@@ -561,7 +599,8 @@ function checkTyped(ans){
   const s=session.soms[session.idx],ms=Date.now()-session.somStart;
   stopCD();stopSW();
   const isOk=ans.trim()===String(s.a)||parseFloat(ans)===s.a;
-  upProgress(currentGroup,s.q,isOk,ms);session.results.push({q:s.q,a:s.a,given:ans,correct:isOk,ms});
+  upProgress(currentGroup,s.q,isOk,ms);
+  session.results.push({q:s.q,a:s.a,given:ans,correct:isOk,ms});
   waitingNext=true;
   if(isOk){
     document.getElementById('question').classList.add('flash-green');
@@ -619,7 +658,8 @@ function handleWrongTimeout(){
   stopSW();document.getElementById('question').classList.add('flash-red');
   if(settings.mc){const grid=document.querySelector('.choices');if(grid)grid.querySelectorAll('.choice-btn').forEach(b=>{if(String(b.textContent)===String(s.a)||parseFloat(b.textContent)===s.a)b.classList.add('correct')})}
   else{document.getElementById('answer-box').className='answer-box show-correct-ans';document.getElementById('typed-ans').textContent=s.a;document.getElementById('cursor').style.display='none'}
-  playTone(220,150);setTimeout(()=>{session.idx++;showSom()},1800)
+  playTone(220,150);
+  setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1800)
 }
 
 function endSession(completed){
@@ -628,7 +668,8 @@ function endSession(completed){
   const res=session.results;
   const nC=res.filter(r=>r.correct).length,total=res.length;
   const avgMs=total?Math.round(res.reduce((a,b)=>a+b.ms,0)/total):0;
-  const nF=res.filter(r=>r.correct&&r.ms<2000).length;
+  const tAuto=(settings.tAuto||5)*1000;
+  const nF=res.filter(r=>r.correct&&r.ms<tAuto).length;
   const pct=nC/total;
   const {emoji,title,msg}=getResultMsg(pct,nC,total,avgMs);
   const lvl=sessionLevel(pct);
@@ -643,33 +684,64 @@ function endSession(completed){
   document.getElementById('r-time').textContent=fmtTime(avgMs);
   document.getElementById('r-speed').textContent=nF;
   const b=document.getElementById('r-improved');
-  if(nF>=5){b.textContent=`${nF} sommen onder 2 seconden — uitstekend!`;b.style.display=''}else b.style.display='none';
+  if(nF>=Math.ceil(total*.6)){b.textContent=`${nF} sommen onder ${settings.tAuto||5} seconden!`;b.style.display=''}else b.style.display='none';
   showScreen('results')
 }
 
+// STOPWATCH & COUNTDOWN
 function startSW(){if(!settings.sw)return;const el=document.getElementById('sw-up');el.style.display='block';const s0=Date.now();clearInterval(swIV);swIV=setInterval(()=>{const ms=Date.now()-s0,s=Math.floor(ms/1000);el.textContent=fmtTime(ms);el.style.color=s<5?'var(--accent)':s<10?'var(--amber)':'var(--red)'},100)}
 function stopSW(){clearInterval(swIV)}
 function resetSW(){stopSW();const el=document.getElementById('sw-up');el.textContent='0:00';el.style.display='none'}
 function startCD(){if(!settings.cd)return;const wrap=document.getElementById('cd-wrap');wrap.classList.add('visible');const fill=document.getElementById('cd-fill'),lbl=document.getElementById('cd-label');const total=settings.cdSec*1000,start=Date.now();fill.style.transition='none';fill.style.width='100%';lbl.textContent=`${settings.cdSec}s`;setTimeout(()=>{fill.style.transition=`width ${total}ms linear`;fill.style.width='0%'},30);clearInterval(cdIV);clearTimeout(cdTO);cdIV=setInterval(()=>{const rem=Math.max(0,settings.cdSec-Math.floor((Date.now()-start)/1000));lbl.textContent=`${rem}s`;fill.style.background=rem>Math.ceil(settings.cdSec*.35)?'var(--amber)':'var(--red)'},200);cdTO=setTimeout(()=>{if(!waitingNext)handleWrongTimeout()},total)}
 function stopCD(){clearTimeout(cdTO);clearInterval(cdIV);document.getElementById('cd-wrap').classList.remove('visible')}
 
-function buildInputUI(){const np=document.getElementById('numpad'),ca=document.getElementById('choice-area'),ab=document.getElementById('answer-box');ca.innerHTML='';if(settings.mc){np.style.display='none';ab.style.display='none';return}ab.style.display='flex';if(!settings.numpad){np.style.display='none';return}np.style.display='grid';np.innerHTML='';[1,2,3,4,5,6,7,8,9,'del',0,'ok'].forEach(b=>{const btn=document.createElement('button');btn.className='np';if(b==='del'){btn.innerHTML='⌫';btn.classList.add('np-del');btn.onclick=()=>handleInput('del')}else if(b==='ok'){btn.textContent='OK';btn.classList.add('np-ok');btn.onclick=()=>handleInput('enter')}else{btn.textContent=b;btn.onclick=()=>handleInput(String(b))}np.appendChild(btn)})}
+// INPUT
+function buildInputUI(){
+  const np=document.getElementById('numpad'),ca=document.getElementById('choice-area'),ab=document.getElementById('answer-box');
+  ca.innerHTML='';
+  if(settings.mc){np.style.display='none';ab.style.display='none';return}
+  ab.style.display='flex';
+  if(!settings.numpad){np.style.display='none';return}
+  np.style.display='grid';np.innerHTML='';
+  [1,2,3,4,5,6,7,8,9,'del',0,'ok'].forEach(b=>{
+    const btn=document.createElement('button');btn.className='np';
+    if(b==='del'){btn.innerHTML='⌫';btn.classList.add('np-del');btn.onclick=()=>handleInput('del')}
+    else if(b==='ok'){btn.textContent='OK';btn.classList.add('np-ok');btn.onclick=()=>handleInput('enter')}
+    else{btn.textContent=b;btn.onclick=()=>handleInput(String(b))}
+    np.appendChild(btn)
+  })
+}
 function playTone(freq,dur){if(!settings.sound)return;try{if(!audioCtx)audioCtx=new AudioContext();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=freq;g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+dur/1000)}catch(e){}}
 
+// THEME & SETTINGS
 function setTheme(t){settings.theme=t;saveSettings();document.documentElement.setAttribute('data-theme',t);document.getElementById('th-light').classList.toggle('active',t==='light');document.getElementById('th-dark').classList.toggle('active',t==='dark')}
-function stepVal(key,delta,min,max){const v=Math.max(min,Math.min(max,settings[key]+delta));settings[key]=v;saveSettings();document.getElementById(`${key}-val`).textContent=key==='cdSec'?`${v}s`:`${v}`;if(key==='cdSec')document.getElementById('cd-sec-row').style.opacity=settings.cd?'1':'0.4'}
 function setAge(age){
   const map={jong:{tAuto:5,tGoed:8},mid:{tAuto:3,tGoed:6},oud:{tAuto:2,tGoed:4}};
   const v=map[age];settings.tAuto=v.tAuto;settings.tGoed=v.tGoed;saveSettings();
   document.getElementById('tAuto-val').textContent=`${v.tAuto}s`;
   document.getElementById('tGoed-val').textContent=`${v.tGoed}s`;
   ['jong','mid','oud'].forEach(a=>document.getElementById(`age-${a}`).classList.remove('active'));
-  document.getElementById(`age-${age}`).classList.add('active');
+  document.getElementById(`age-${age}`).classList.add('active')
 }
-function syncSettings(){const s=settings;const bind=(id,key,cb)=>{const el=document.getElementById(id);if(!el)return;el.checked=s[key];el.onchange=e=>{s[key]=e.target.checked;saveSettings();if(cb)cb(e.target.checked)}};bind('set-sw','sw');bind('set-cd','cd',v=>document.getElementById('cd-sec-row').style.opacity=v?'1':'0.4');bind('set-mc','mc');bind('set-auto','auto');bind('set-numpad','numpad');bind('set-sound','sound');document.getElementById('cdSec-val').textContent=`${s.cdSec}s`;document.getElementById('sessionCount-val').textContent=`${s.sessionCount}`;  document.getElementById('tAuto-val').textContent=`${s.tAuto||5}s`;
+function stepVal(key,delta,min,max){
+  const v=Math.max(min,Math.min(max,(settings[key]||0)+delta));settings[key]=v;saveSettings();
+  document.getElementById(`${key}-val`).textContent=key==='cdSec'||key==='tAuto'||key==='tGoed'?`${v}s`:`${v}`;
+  if(key==='cdSec')document.getElementById('cd-sec-row').style.opacity=settings.cd?'1':'0.4'
+}
+function syncSettings(){
+  const s=settings;
+  const bind=(id,key,cb)=>{const el=document.getElementById(id);if(!el)return;el.checked=s[key];el.onchange=e=>{s[key]=e.target.checked;saveSettings();if(cb)cb(e.target.checked)}};
+  bind('set-sw','sw');bind('set-cd','cd',v=>document.getElementById('cd-sec-row').style.opacity=v?'1':'0.4');
+  bind('set-mc','mc');bind('set-auto','auto');bind('set-sound','sound');
+  document.getElementById('cdSec-val').textContent=`${s.cdSec}s`;
+  document.getElementById('sessionCount-val').textContent=`${s.sessionCount}`;
+  document.getElementById('tAuto-val').textContent=`${s.tAuto||5}s`;
   document.getElementById('tGoed-val').textContent=`${s.tGoed||8}s`;
-  document.getElementById('cd-sec-row').style.opacity=s.cd?'1':'0.4';setTheme(s.theme)}
+  document.getElementById('cd-sec-row').style.opacity=s.cd?'1':'0.4';
+  setTheme(s.theme)
+}
 
+// HOME
 function renderHome(){
   document.getElementById('home-avatar').textContent=profile.emoji;
   document.getElementById('home-name').textContent=profile.name;
@@ -684,14 +756,7 @@ function renderOpGrid(){
   g.options.forEach(opt=>{const chip=document.createElement('button');chip.className='op-chip'+(sel.includes(opt.id)?' sel':'');chip.textContent=opt.label;chip.onclick=()=>{let cur=[...(profile.groupSel[currentGroup]||[...g.defaultSel])];if(cur.includes(opt.id)){if(cur.length===1)return;cur=cur.filter(x=>x!==opt.id)}else cur.push(opt.id);profile.groupSel[currentGroup]=cur;currentSel=cur;saveProfiles();renderOpGrid()};grid.appendChild(chip)})
 }
 
-function renderProgressGrid(g,sel){
-  if(!sel)sel=profile.groupSel[g]||GROUPS[g].defaultSel;
-  const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
-  const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
-  const tAuto=(settings.tAuto||5)*1000;
-  const tGoed=(settings.tGoed||8)*1000;
-  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<tAuto&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<tGoed&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
-}
+// PROGRESS
 function calcStreak(sessions){
   if(!sessions.length)return 0;
   const days=new Set(sessions.map(s=>new Date(s.ts).toDateString()));
@@ -700,8 +765,25 @@ function calcStreak(sessions){
   return streak
 }
 
+function renderProgressGrid(g,sel){
+  if(!sel)sel=profile.groupSel[g]||GROUPS[g].defaultSel;
+  const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
+  const tAuto=(settings.tAuto||5)*1000;
+  const tGoed=(settings.tGoed||8)*1000;
+  const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));
+  grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
+  pool.forEach(s=>{
+    const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};
+    const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;
+    const err=p.count>0?(p.count-p.correct)/p.count:0;
+    let color='var(--surface2)',textColor='var(--text3)';
+    if(p.count>0){if(avg<tAuto&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<tGoed&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}
+    const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;
+    grid.appendChild(cell)
+  })
+}
+
 function renderProgressScreen(){
-  // Statistieken bovenaan
   const sessions=profile.sessions||[];
   const totalSoms=sessions.reduce((a,s)=>a+s.total,0);
   const bestSession=sessions.reduce((best,s)=>s.pct>=(best?.pct||0)?s:best,null);
@@ -722,59 +804,45 @@ function renderProgressScreen(){
       </div>
     </div>`;
 
-  // Level overview per groep — gebaseerd op geoefende sommen
   const levelHTML=Object.keys(GROUPS).map(g=>{
     const n=Number(g);
-    // Haal alle geoefende sommen op voor deze groep
-    const geoefend=Object.entries(profile.progress||{})
-      .filter(([k])=>k.startsWith(`${n}::`))
-      .map(([,v])=>v);
-    if(!geoefend.length)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-        <div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div>
-        <div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div>
-      </div>
-      <div style="font-size:.68rem;color:var(--text3)">Nog niet geoefend</div>
-    </div>`;
+    const geoefend=Object.entries(profile.progress||{}).filter(([k])=>k.startsWith(`${n}::`)).map(([,v])=>v);
+    if(!geoefend.length)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div></div><div style="font-size:.68rem;color:var(--text3);margin-top:4px">Nog niet geoefend</div></div>`;
     const total=geoefend.length;
-    const uitstekend=geoefend.filter(p=>{const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=(p.count-p.correct)/p.count;return avg<(settings.tAuto||5)*1000&&err<.15}).length;
+    const tAuto=(settings.tAuto||5)*1000;
+    const uitstekend=geoefend.filter(p=>{const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=(p.count-p.correct)/p.count;return avg<tAuto&&err<.15}).length;
     const pct=Math.round(uitstekend/total*100);
     const barColor=pct>=80?'var(--green)':pct>=40?'var(--amber)':'var(--red)';
-    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
-        <div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div>
-        <div style="font-size:.85rem;font-weight:700;color:${barColor}">${pct}%</div>
-      </div>
-      <div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden">
-        <div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px;transition:width .4s"></div>
-      </div>
-      <div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">${uitstekend} van ${total} geoefende sommen automatisch</div>
-    </div>`
+    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:${barColor}">${pct}%</div></div><div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px"></div></div><div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">${uitstekend} van ${total} geoefende sommen automatisch</div></div>`
   }).join('');
   document.getElementById('level-row').innerHTML=levelHTML;
-  const pg=document.getElementById('prog-group-grid');pg.innerHTML='';
+
   let progSel=profile.groupSel[currentGroup]||GROUPS[currentGroup].defaultSel;
+  const pg=document.getElementById('prog-group-grid');pg.innerHTML='';
   function renderProgOps(g){
     const opWrap=document.getElementById('prog-op-grid');opWrap.innerHTML='';
-    const opts=GROUPS[g].options;
-    opts.forEach(opt=>{
-      const chip=document.createElement('button');chip.className='op-chip'+(progSel.includes(opt.id)?' sel':'');
-      chip.textContent=opt.label;
+    GROUPS[g].options.forEach(opt=>{
+      const chip=document.createElement('button');chip.className='op-chip'+(progSel.includes(opt.id)?' sel':'');chip.textContent=opt.label;
       chip.onclick=()=>{
-        if(progSel.includes(opt.id)){if(progSel.length===1)return;progSel=progSel.filter(x=>x!==opt.id)}
-        else progSel=[...progSel,opt.id];
+        if(progSel.includes(opt.id)){if(progSel.length===1)return;progSel=progSel.filter(x=>x!==opt.id)}else progSel=[...progSel,opt.id];
         opWrap.querySelectorAll('.op-chip').forEach(c=>c.classList.remove('sel'));
-        progSel.forEach(id=>{const c=[...opWrap.querySelectorAll('.op-chip')].find(c=>c.textContent===opts.find(o=>o.id===id)?.label);if(c)c.classList.add('sel')});
-        renderProgressGrid(g,progSel);
+        progSel.forEach(id=>{const found=[...opWrap.querySelectorAll('.op-chip')].find(c=>c.textContent===GROUPS[g].options.find(o=>o.id===id)?.label);if(found)found.classList.add('sel')});
+        renderProgressGrid(g,progSel)
       };
-      opWrap.appendChild(chip);
-    });
+      opWrap.appendChild(chip)
+    })
   }
-  Object.keys(GROUPS).forEach(g=>{const n=Number(g),info=GROUPS[n];const btn=document.createElement('button');btn.className='group-btn'+(n===currentGroup?' sel':'');btn.innerHTML=`<div class="gb-num">Gr.${n}</div><div class="gb-sub">${info.sub}</div>`;btn.onclick=()=>{progSel=profile.groupSel[n]||GROUPS[n].defaultSel;pg.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');renderProgOps(n);renderProgressGrid(n,progSel)};pg.appendChild(btn)});
+  Object.keys(GROUPS).forEach(g=>{
+    const n=Number(g),info=GROUPS[n];
+    const btn=document.createElement('button');btn.className='group-btn'+(n===currentGroup?' sel':'');
+    btn.innerHTML=`<div class="gb-num">Gr.${n}</div><div class="gb-sub">${info.sub}</div>`;
+    btn.onclick=()=>{progSel=profile.groupSel[n]||GROUPS[n].defaultSel;pg.querySelectorAll('.group-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');renderProgOps(n);renderProgressGrid(n,progSel)};
+    pg.appendChild(btn)
+  });
   renderProgOps(currentGroup);
   renderProgressGrid(currentGroup,progSel);
+
   const sl=document.getElementById('session-list');sl.innerHTML='';
-  const sessions=profile.sessions||[];
   if(!sessions.length){sl.innerHTML='<div style="text-align:center;color:var(--text2);font-size:.85rem;padding:.75rem">Nog geen sessies gespeeld</div>';return}
   sessions.forEach(s=>{
     const item=document.createElement('div');item.className='session-item';
@@ -783,6 +851,7 @@ function renderProgressScreen(){
   })
 }
 
+// NAVIGATION
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -791,16 +860,17 @@ function showScreen(id){
   if(id==='progress-screen')renderProgressScreen();
 }
 
+// KEYBOARD
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('practice').classList.contains('active')||settings.mc)return;
   if(e.key>='0'&&e.key<='9'){handleInput(e.key);e.preventDefault()}
   else if(e.key==='Backspace'){handleInput('del');e.preventDefault()}
   else if(e.key==='Enter'||e.key===' '){handleInput('enter');e.preventDefault()}
-  else if(e.key==='.'){handleInput('.');e.preventDefault()}
 });
 document.getElementById('hidden-input').addEventListener('input',function(){const v=this.value;this.value='';for(const c of v)if(c>='0'&&c<='9')handleInput(c)});
 document.addEventListener('click',e=>{if(!document.getElementById('practice').classList.contains('active'))return;if(!settings.mc&&!e.target.classList.contains('np')&&!e.target.classList.contains('back-btn'))setTimeout(focusInput,50)});
 
+// INIT
 document.documentElement.setAttribute('data-theme',settings.theme||'dark');
 profile=profiles.find(p=>p.id===activeProfileId)||null;
 if(profile){if(!profile.sessions)profile.sessions=[];selectProfile(profile.id)}else showScreen('profiles-screen');
