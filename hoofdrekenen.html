@@ -536,19 +536,21 @@ function checkTyped(ans){
   stopCD();stopSW();
   const isOk=ans.trim()===String(s.a)||parseFloat(ans)===s.a;
   upProgress(currentGroup,s.q,isOk,ms);session.results.push({q:s.q,a:s.a,given:ans,correct:isOk,ms});
+  waitingNext=true;
   if(isOk){
     document.getElementById('question').classList.add('flash-green');
     document.getElementById('answer-box').className='answer-box correct-ans';
     document.getElementById('cursor').style.display='none';
-    playTone(880,80);waitingNext=true;setTimeout(()=>{session.idx++;showSom()},400)
+    playTone(880,80);
+    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},400)
   } else {
     document.getElementById('answer-box').className='answer-box wrong-ans';
     document.getElementById('typed-ans').textContent=ans;
     document.getElementById('cursor').style.display='none';
     document.getElementById('question').classList.add('flash-red');
-    playTone(220,150);waitingNext=true;
+    playTone(220,150);
     setTimeout(()=>{document.getElementById('answer-box').className='answer-box show-correct-ans';document.getElementById('typed-ans').textContent=s.a},400);
-    setTimeout(()=>{session.idx++;showSom()},1800)
+    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1800)
   }
 }
 
@@ -566,8 +568,14 @@ function handleChoice(chosen,s,btn,grid){
   const isOk=String(chosen)===String(s.a)||parseFloat(chosen)===s.a;
   upProgress(currentGroup,s.q,isOk,ms);session.results.push({q:s.q,a:s.a,given:chosen,correct:isOk,ms});
   waitingNext=true;btn.classList.add(isOk?'correct':'wrong');
-  if(!isOk){grid.querySelectorAll('.choice-btn').forEach(b=>{if(String(b.textContent)===String(s.a)||parseFloat(b.textContent)===s.a)b.classList.add('correct')});document.getElementById('question').classList.add('flash-red');playTone(220,150);setTimeout(()=>{session.idx++;showSom()},1600)}
-  else{document.getElementById('question').classList.add('flash-green');playTone(880,80);setTimeout(()=>{session.idx++;showSom()},500)}
+  if(!isOk){
+    grid.querySelectorAll('.choice-btn').forEach(b=>{if(String(b.textContent)===String(s.a)||parseFloat(b.textContent)===s.a)b.classList.add('correct')});
+    document.getElementById('question').classList.add('flash-red');playTone(220,150);
+    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1600)
+  } else {
+    document.getElementById('question').classList.add('flash-green');playTone(880,80);
+    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},500)
+  }
 }
 
 function makeChoices(correct){
@@ -644,7 +652,7 @@ function renderProgressGrid(g){
   const sel=profile.groupSel[g]||GROUPS[g].defaultSel;
   const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
   const cols=Math.ceil(Math.sqrt(pool.length));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
-  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--border)';if(p.count>0){if(avg<2000&&err<.15)color='var(--green)';else if(avg<3500&&err<.3)color='var(--amber)';else color='var(--red)'}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.title=s.q;grid.appendChild(cell)})
+  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--border)';if(p.count>0){if(avg<2000&&err<.15)color='var(--green)';else if(avg<3500&&err<.3)color='var(--amber)';else color='var(--red)'}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.cursor='pointer';cell.title=s.q;cell.onclick=()=>{const existing=grid.querySelector('.pc-tooltip');if(existing)existing.remove();const tip=document.createElement('div');tip.className='pc-tooltip';tip.textContent=s.q;tip.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.6rem 1.2rem;font-size:1.1rem;font-weight:700;color:var(--text);box-shadow:var(--shadow);z-index:50';document.body.appendChild(tip);setTimeout(()=>tip.remove(),2000)};grid.appendChild(cell)})
 }
 function renderProgressScreen(){
   let begin=0,goed=0,uitstekend=0;
