@@ -402,7 +402,7 @@ function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function pk(a){return a[Math.floor(Math.random()*a.length)]}
 function pf(sel){return sel[Math.floor(Math.random()*sel.length)]}
 function fmtTime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60);return`${m}:${String(s%60).padStart(2,'0')}`}
-function fmtDate(ts){const d=new Date(ts);return d.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})+' '+d.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'})}
+function fmtDate(ts){const d=new Date(ts);return d.toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'})}
 
 function loadProfiles(){try{return JSON.parse(localStorage.getItem('hr_profiles'))||[]}catch{return[]}}
 function saveProfiles(){localStorage.setItem('hr_profiles',JSON.stringify(profiles))}
@@ -656,15 +656,22 @@ function renderProgressGrid(g,sel){
   pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<2000&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<3500&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
 }
 function renderProgressScreen(){
-  // Level overview per groep
+  // Level overview per groep — gebaseerd op geoefende sommen
   const levelHTML=Object.keys(GROUPS).map(g=>{
     const n=Number(g);
-    const sel=profile.groupSel[n]||GROUPS[n].defaultSel;
-    const pool=buildPool(n,sel,48);
-    const total=pool.length;
-    if(!total)return'';
-    const gedaan=pool.filter(s=>profile.progress[gk(n,s.q)]&&profile.progress[gk(n,s.q)].count>0).length;
-    const uitstekend=pool.filter(s=>{const p=profile.progress[gk(n,s.q)];if(!p||!p.count)return false;const avg=p.times.reduce((a,b)=>a+b,0)/p.times.length;const err=(p.count-p.correct)/p.count;return avg<2000&&err<.15}).length;
+    // Haal alle geoefende sommen op voor deze groep
+    const geoefend=Object.entries(profile.progress||{})
+      .filter(([k])=>k.startsWith(`${n}::`))
+      .map(([,v])=>v);
+    if(!geoefend.length)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+        <div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div>
+        <div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div>
+      </div>
+      <div style="font-size:.68rem;color:var(--text3)">Nog niet geoefend</div>
+    </div>`;
+    const total=geoefend.length;
+    const uitstekend=geoefend.filter(p=>{const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=(p.count-p.correct)/p.count;return avg<2000&&err<.15}).length;
     const pct=Math.round(uitstekend/total*100);
     const barColor=pct>=80?'var(--green)':pct>=40?'var(--amber)':'var(--red)';
     return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)">
@@ -675,7 +682,7 @@ function renderProgressScreen(){
       <div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden">
         <div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px;transition:width .4s"></div>
       </div>
-      <div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">${uitstekend} van ${total} sommen automatisch · ${gedaan} geoefend</div>
+      <div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">${uitstekend} van ${total} geoefende sommen automatisch</div>
     </div>`
   }).join('');
   document.getElementById('level-row').innerHTML=levelHTML;
