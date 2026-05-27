@@ -602,7 +602,6 @@ function endSession(completed){
   profile.sessions.unshift({ts:Date.now(),group:currentGroup,sel:selLabel,nC,total,avgMs,pct,level:lvl.label,levelCls:lvl.cls});
   if(profile.sessions.length>50)profile.sessions=profile.sessions.slice(0,50);
   saveProfiles();
-  if(pct===1)launchConfetti();
   document.getElementById('r-emoji').textContent=emoji;
   document.getElementById('r-title').textContent=title;
   document.getElementById('r-msg').textContent=msg;
