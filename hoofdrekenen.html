@@ -212,6 +212,8 @@ input:checked+.tog-track:before{transform:translateX(20px)}
     <div class="home-title">Hoofdrekenen</div>
     <div class="home-sub">Snel en zeker — één som per keer</div>
   </div>
+  <div id="progress-stats" style="width:100%"></div>
+
   <div style="width:100%">
     <div class="section-label">Groep</div>
     <div class="group-grid" id="group-grid"></div>
@@ -365,7 +367,30 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   </div>
   <div class="settings-group">
     <div class="setting-row">
-      <div class="setting-left"><div class="setting-label">Voortgang wissen</div><div class="setting-sub">Alleen voor huidig profiel</div></div>
+      <div class="setting-left"><div class="setting-label">Leeftijd</div><div class="setting-sub">Past tijdsgrenzen automatisch aan</div></div>
+      <div style="display:flex;gap:.4rem;flex-shrink:0">
+        <button class="th-btn" id="age-jong" onclick="setAge('jong')">5–7</button>
+        <button class="th-btn" id="age-mid" onclick="setAge('mid')">8–10</button>
+        <button class="th-btn" id="age-oud" onclick="setAge('oud')">11–12</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-left"><div class="setting-label">Automatisch onder</div><div class="setting-sub">Seconden voor groene blokjes</div></div>
+      <div class="stepper">
+        <button class="step-btn" onclick="stepVal('tAuto',-1,1,10)">−</button>
+        <div class="step-val" id="tAuto-val">5s</div>
+        <button class="step-btn" onclick="stepVal('tAuto',1,1,10)">+</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-left"><div class="setting-label">Goed onder</div><div class="setting-sub">Seconden voor gele blokjes</div></div>
+      <div class="stepper">
+        <button class="step-btn" onclick="stepVal('tGoed',-1,2,15)">−</button>
+        <div class="step-val" id="tGoed-val">8s</div>
+        <button class="step-btn" onclick="stepVal('tGoed',1,2,15)">+</button>
+      </div>
+    </div>
+  </div><div class="setting-sub">Alleen voor huidig profiel</div></div>
       <button class="danger-btn" onclick="clearProgress()">Wis</button>
     </div>
   </div>
@@ -408,7 +433,7 @@ function loadProfiles(){try{return JSON.parse(localStorage.getItem('hr_profiles'
 function saveProfiles(){localStorage.setItem('hr_profiles',JSON.stringify(profiles))}
 function loadSettings(){try{return JSON.parse(localStorage.getItem('hr_settings'))||defSettings()}catch{return defSettings()}}
 function saveSettings(){localStorage.setItem('hr_settings',JSON.stringify(settings))}
-function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark'}}
+function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark',tAuto:5,tGoed:8}}
 function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus','min','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[]}}
 
 let profiles=loadProfiles(),settings=loadSettings();
@@ -633,7 +658,17 @@ function playTone(freq,dur){if(!settings.sound)return;try{if(!audioCtx)audioCtx=
 
 function setTheme(t){settings.theme=t;saveSettings();document.documentElement.setAttribute('data-theme',t);document.getElementById('th-light').classList.toggle('active',t==='light');document.getElementById('th-dark').classList.toggle('active',t==='dark')}
 function stepVal(key,delta,min,max){const v=Math.max(min,Math.min(max,settings[key]+delta));settings[key]=v;saveSettings();document.getElementById(`${key}-val`).textContent=key==='cdSec'?`${v}s`:`${v}`;if(key==='cdSec')document.getElementById('cd-sec-row').style.opacity=settings.cd?'1':'0.4'}
-function syncSettings(){const s=settings;const bind=(id,key,cb)=>{const el=document.getElementById(id);if(!el)return;el.checked=s[key];el.onchange=e=>{s[key]=e.target.checked;saveSettings();if(cb)cb(e.target.checked)}};bind('set-sw','sw');bind('set-cd','cd',v=>document.getElementById('cd-sec-row').style.opacity=v?'1':'0.4');bind('set-mc','mc');bind('set-auto','auto');bind('set-numpad','numpad');bind('set-sound','sound');document.getElementById('cdSec-val').textContent=`${s.cdSec}s`;document.getElementById('sessionCount-val').textContent=`${s.sessionCount}`;document.getElementById('cd-sec-row').style.opacity=s.cd?'1':'0.4';setTheme(s.theme)}
+function setAge(age){
+  const map={jong:{tAuto:5,tGoed:8},mid:{tAuto:3,tGoed:6},oud:{tAuto:2,tGoed:4}};
+  const v=map[age];settings.tAuto=v.tAuto;settings.tGoed=v.tGoed;saveSettings();
+  document.getElementById('tAuto-val').textContent=`${v.tAuto}s`;
+  document.getElementById('tGoed-val').textContent=`${v.tGoed}s`;
+  ['jong','mid','oud'].forEach(a=>document.getElementById(`age-${a}`).classList.remove('active'));
+  document.getElementById(`age-${age}`).classList.add('active');
+}
+function syncSettings(){const s=settings;const bind=(id,key,cb)=>{const el=document.getElementById(id);if(!el)return;el.checked=s[key];el.onchange=e=>{s[key]=e.target.checked;saveSettings();if(cb)cb(e.target.checked)}};bind('set-sw','sw');bind('set-cd','cd',v=>document.getElementById('cd-sec-row').style.opacity=v?'1':'0.4');bind('set-mc','mc');bind('set-auto','auto');bind('set-numpad','numpad');bind('set-sound','sound');document.getElementById('cdSec-val').textContent=`${s.cdSec}s`;document.getElementById('sessionCount-val').textContent=`${s.sessionCount}`;  document.getElementById('tAuto-val').textContent=`${s.tAuto||5}s`;
+  document.getElementById('tGoed-val').textContent=`${s.tGoed||8}s`;
+  document.getElementById('cd-sec-row').style.opacity=s.cd?'1':'0.4';setTheme(s.theme)}
 
 function renderHome(){
   document.getElementById('home-avatar').textContent=profile.emoji;
@@ -653,9 +688,40 @@ function renderProgressGrid(g,sel){
   if(!sel)sel=profile.groupSel[g]||GROUPS[g].defaultSel;
   const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
   const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
-  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<2000&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<3500&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
+  const tAuto=(settings.tAuto||5)*1000;
+  const tGoed=(settings.tGoed||8)*1000;
+  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<tAuto&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<tGoed&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
 }
+function calcStreak(sessions){
+  if(!sessions.length)return 0;
+  const days=new Set(sessions.map(s=>new Date(s.ts).toDateString()));
+  let streak=0,d=new Date();
+  while(days.has(d.toDateString())){streak++;d.setDate(d.getDate()-1)}
+  return streak
+}
+
 function renderProgressScreen(){
+  // Statistieken bovenaan
+  const sessions=profile.sessions||[];
+  const totalSoms=sessions.reduce((a,s)=>a+s.total,0);
+  const bestSession=sessions.reduce((best,s)=>s.pct>=(best?.pct||0)?s:best,null);
+  const streak=calcStreak(sessions);
+  document.getElementById('progress-stats').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;width:100%">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem .5rem;text-align:center;box-shadow:var(--shadow-sm)">
+        <div style="font-size:1.5rem;font-weight:700;color:var(--text)">${streak}</div>
+        <div style="font-size:.65rem;color:var(--text2);margin-top:3px;font-weight:500">🔥 Dagen op rij</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem .5rem;text-align:center;box-shadow:var(--shadow-sm)">
+        <div style="font-size:1.5rem;font-weight:700;color:var(--text)">${totalSoms}</div>
+        <div style="font-size:.65rem;color:var(--text2);margin-top:3px;font-weight:500">📝 Sommen gemaakt</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem .5rem;text-align:center;box-shadow:var(--shadow-sm)">
+        <div style="font-size:1.5rem;font-weight:700;color:var(--text)">${bestSession?Math.round(bestSession.pct*100)+'%':'—'}</div>
+        <div style="font-size:.65rem;color:var(--text2);margin-top:3px;font-weight:500">🏆 Beste sessie</div>
+      </div>
+    </div>`;
+
   // Level overview per groep — gebaseerd op geoefende sommen
   const levelHTML=Object.keys(GROUPS).map(g=>{
     const n=Number(g);
@@ -671,7 +737,7 @@ function renderProgressScreen(){
       <div style="font-size:.68rem;color:var(--text3)">Nog niet geoefend</div>
     </div>`;
     const total=geoefend.length;
-    const uitstekend=geoefend.filter(p=>{const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=(p.count-p.correct)/p.count;return avg<2000&&err<.15}).length;
+    const uitstekend=geoefend.filter(p=>{const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=(p.count-p.correct)/p.count;return avg<(settings.tAuto||5)*1000&&err<.15}).length;
     const pct=Math.round(uitstekend/total*100);
     const barColor=pct>=80?'var(--green)':pct>=40?'var(--amber)':'var(--red)';
     return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)">
