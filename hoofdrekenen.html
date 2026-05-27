@@ -139,7 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 #progress-screen{gap:1.25rem;padding:2rem 1rem}
 .prog-grid-wrap{background:var(--surface);border-radius:18px;border:1px solid var(--border);padding:1rem;box-shadow:var(--shadow-sm);width:100%}
 .pg{display:grid;gap:3px;width:100%}
-.pc{border-radius:5px;aspect-ratio:1;cursor:default}
+.pc{border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;color:rgba(255,255,255,.85);padding:2px;text-align:center;line-height:1.2;min-height:32px}
 .prog-legend{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.75rem}
 .leg-item{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--text2)}
 .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
@@ -651,8 +651,8 @@ function renderOpGrid(){
 function renderProgressGrid(g){
   const sel=profile.groupSel[g]||GROUPS[g].defaultSel;
   const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
-  const cols=Math.ceil(Math.sqrt(pool.length));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
-  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--border)';if(p.count>0){if(avg<2000&&err<.15)color='var(--green)';else if(avg<3500&&err<.3)color='var(--amber)';else color='var(--red)'}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.cursor='pointer';cell.title=s.q;cell.onclick=()=>{const existing=grid.querySelector('.pc-tooltip');if(existing)existing.remove();const tip=document.createElement('div');tip.className='pc-tooltip';tip.textContent=s.q;tip.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.6rem 1.2rem;font-size:1.1rem;font-weight:700;color:var(--text);box-shadow:var(--shadow);z-index:50';document.body.appendChild(tip);setTimeout(()=>tip.remove(),2000)};grid.appendChild(cell)})
+  const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
+  pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--surface2)';let textColor='var(--text3)';if(p.count>0){if(avg<2000&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<3500&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)})
 }
 function renderProgressScreen(){
   let begin=0,goed=0,uitstekend=0;
