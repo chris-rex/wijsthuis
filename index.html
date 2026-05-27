@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoofdrekenen</title>
+<meta name="description" content="Gratis oefenapp voor hoofdrekenen, voor kinderen van groep 2 t/m 8.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f5f7;--surface:#fff;--text:#1d1d1f;--text2:#6e6e73;--text3:#aeaeb2;--accent:#0071e3;--border:rgba(0,0,0,.08);--radius:20px}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,245,247,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:.6rem}
+.nav-logo img{width:28px;height:28px;border-radius:7px}
+.nav-logo span{font-size:.9rem;font-weight:600;color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;padding:.45rem 1.1rem;border-radius:100px;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(0,113,227,.07) 0%,transparent 70%);pointer-events:none}
+.hero-icon{width:100px;height:100px;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.15);margin-bottom:2rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .1s forwards}
+.hero h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:1.25rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s forwards}
+.hero h1 span{background:linear-gradient(135deg,#0071e3,#02dad4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text2);max-width:480px;line-height:1.6;margin-bottom:2.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .3s forwards}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;opacity:0;transform:translateY(20px);animation:fadeUp .8s .4s forwards}
+.btn-primary{background:var(--accent);color:#fff;font-size:1rem;font-weight:600;padding:.85rem 2rem;border-radius:100px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(0,113,227,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,113,227,.4)}
+.btn-ghost{background:transparent;color:var(--accent);font-size:1rem;font-weight:600;padding:.85rem 2rem;border-radius:100px;text-decoration:none;border:1.5px solid rgba(0,113,227,.3);transition:all .2s}
+.btn-ghost:hover{background:rgba(0,113,227,.06)}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.scroll-hint span{font-size:.72rem;color:var(--text3);letter-spacing:.05em;text-transform:uppercase}
+.scroll-dot{width:4px;height:4px;background:var(--text3);border-radius:50%;animation:bounce 1.5s infinite}
+
+/* SECTIONS */
+section{padding:5rem 2rem}
+.container{max-width:760px;margin:0 auto}
+.section-label{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:560px}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.how-card{background:var(--surface);border-radius:var(--radius);padding:1.75rem 1.5rem;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
+.how-card:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,0,0,.1)}
+.how-num{font-size:2rem;font-weight:700;color:var(--accent);opacity:.2;margin-bottom:.75rem;line-height:1}
+.how-card h3{font-size:1rem;font-weight:600;margin-bottom:.5rem}
+.how-card p{font-size:.88rem;color:var(--text2);line-height:1.6}
+
+/* GROUPS */
+.groups-wrap{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border);margin-top:3rem}
+.group-row{display:flex;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--border);transition:background .2s}
+.group-row:last-child{border-bottom:none}
+.group-row:hover{background:#f9f9fb}
+.group-tag{font-size:.72rem;font-weight:700;background:rgba(0,113,227,.1);color:var(--accent);border-radius:6px;padding:.2rem .6rem;margin-right:1rem;white-space:nowrap}
+.group-row p{font-size:.9rem;color:var(--text2)}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:3rem}
+.feature-card{background:var(--surface);border-radius:var(--radius);padding:1.5rem;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start;transition:transform .3s}
+.feature-card:hover{transform:translateY(-3px)}
+.feature-icon{font-size:1.4rem;flex-shrink:0;width:44px;height:44px;background:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.feature-card h3{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
+.feature-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.step{background:var(--surface);border-radius:var(--radius);padding:2rem;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border)}
+.step-badge{display:inline-block;font-size:.72rem;font-weight:700;background:rgba(0,113,227,.1);color:var(--accent);border-radius:100px;padding:.25rem .75rem;margin-bottom:1rem}
+.step h3{font-size:1.05rem;font-weight:600;margin-bottom:.5rem}
+.step p{font-size:.88rem;color:var(--text2);line-height:1.6}
+
+/* SMART */
+.smart-box{background:linear-gradient(135deg,#f0f7ff,#f0fffe);border:1px solid #d0e8ff;border-radius:var(--radius);padding:2.5rem;margin-top:3rem;text-align:center}
+.smart-box p{font-size:1rem;color:#1d3a5f;line-height:1.8;max-width:540px;margin:0 auto}
+
+/* STORY */
+.story{background:var(--surface);border-radius:var(--radius);padding:2.5rem;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border);margin-top:3rem}
+.story p{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:.75rem}
+.story p:last-child{margin-bottom:0}
+
+/* INSTALL */
+.install-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:3rem}
+.install-card{background:var(--surface);border-radius:var(--radius);padding:1.75rem;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border)}
+.install-card h3{font-size:.95rem;font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.install-steps{display:flex;flex-direction:column;gap:.6rem}
+.install-step{display:flex;align-items:flex-start;gap:.65rem;font-size:.85rem;color:var(--text2);line-height:1.5}
+.install-step-num{width:20px;height:20px;background:var(--accent);color:#fff;border-radius:50%;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+/* PILLS */
+.pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.pill{background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.4rem 1rem;font-size:.82rem;color:var(--text2);box-shadow:0 1px 6px rgba(0,0,0,.04)}
+
+/* FEEDBACK */
+.feedback-box{background:linear-gradient(135deg,#f0f7ff,#f0fffe);border:1px solid #d0e8ff;border-radius:var(--radius);padding:2.5rem;margin-top:3rem;text-align:center}
+.feedback-box p{font-size:.95rem;color:#1d3a5f;line-height:1.7;margin-bottom:.5rem}
+
+/* CTA BOTTOM */
+.cta-section{background:linear-gradient(135deg,#01285d,#0a4a8f);color:#fff;text-align:center;padding:5rem 2rem}
+.cta-section h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;letter-spacing:-.03em;margin-bottom:.75rem}
+.cta-section p{font-size:1rem;opacity:.75;margin-bottom:2rem}
+.btn-white{background:#fff;color:#01285d;font-size:1rem;font-weight:700;padding:.9rem 2.25rem;border-radius:100px;text-decoration:none;transition:transform .2s,box-shadow .2s;display:inline-block;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--text3);border-top:1px solid var(--border)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){
+  .how-grid,.features-grid,.steps,.install-grid{grid-template-columns:1fr}
+  nav{padding:.8rem 1.25rem}
+  section{padding:4rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="apple-touch-icon.png" alt="Hoofdrekenen">
+    <span>Hoofdrekenen</span>
+  </div>
+  <a class="nav-cta" href="hoofdrekenen.html">Open de app</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <img class="hero-icon" src="apple-touch-icon.png" alt="Hoofdrekenen">
+  <h1>Rekenen dat <span>blijft hangen</span></h1>
+  <p class="hero-sub">Gratis oefenapp voor kinderen van groep 2 t/m 8. Geen afleiding, geen spelletjes, gewoon sommen herhalen totdat het automatisch gaat.</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="hoofdrekenen.html">▶ Open de app</a>
+    <a class="btn-ghost" href="#hoe">Meer info</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="hoe">
+  <div class="container reveal">
+    <div class="section-label">Hoe het werkt</div>
+    <h2 class="section-title">Simpel en effectief</h2>
+    <p class="section-sub">De app toont één som tegelijk, groot in beeld. Direct feedback, geen omwegen.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <h3>Kies het niveau</h3>
+        <p>Selecteer de groep die past bij jouw kind en kies welke sommen je wilt oefenen.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <h3>Oefen en herhaal</h3>
+        <p>Eén som per keer, groot in beeld. Type het antwoord in of kies uit vier opties.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <h3>Zie de vooruitgang</h3>
+        <p>De app onthoudt wat goed gaat en wat nog lastig is. Elke sessie wordt slimmer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUPS -->
+<section style="background:var(--surface);padding:5rem 2rem">
+  <div class="container reveal">
+    <div class="section-label">Niveaus</div>
+    <h2 class="section-title">Voor elke groep</h2>
+    <p class="section-sub">Kies zelf de groep die past bij het niveau van jouw kind.</p>
+    <div class="groups-wrap">
+      <div class="group-row"><span class="group-tag">Groep 2</span><p>Optellen en aftrekken tot 10</p></div>
+      <div class="group-row"><span class="group-tag">Groep 3</span><p>Tot 20, inclusief dubbelen</p></div>
+      <div class="group-row"><span class="group-tag">Groep 4</span><p>Tot 100 en de tafels van 2, 5 en 10</p></div>
+      <div class="group-row"><span class="group-tag">Groep 5</span><p>Alle tafels t/m 10, inclusief deelsommen</p></div>
+      <div class="group-row"><span class="group-tag">Groep 6</span><p>Grote getallen en breuken</p></div>
+      <div class="group-row"><span class="group-tag">Groep 7</span><p>Procenten en kommagetallen</p></div>
+      <div class="group-row"><span class="group-tag">Groep 8</span><p>Alles door elkaar</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <div class="container reveal">
+    <div class="section-label">Instellingen</div>
+    <h2 class="section-title">Jij bepaalt</h2>
+    <p class="section-sub">Pas de app volledig aan op het tempo en de behoeften van jouw kind.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🎯</div><div><h3>Kies de sommen</h3><p>Oefen alleen de tafel van 6 en 7, of juist alles door elkaar.</p></div></div>
+      <div class="feature-card"><div class="feature-icon">🔢</div><div><h3>Sommen per sessie</h3><p>Stel zelf in hoeveel sommen per sessie, standaard 25.</p></div></div>
+      <div class="feature-card"><div class="feature-icon">⏱️</div><div><h3>Stopwatch</h3><p>Laat je kind zijn eigen tijd zien, zo wordt snelheid een doel.</p></div></div>
+      <div class="feature-card"><div class="feature-icon">⏳</div><div><h3>Afteltimer</h3><p>Zet een tijdsbalk aan voor extra uitdaging en focus.</p></div></div>
+      <div class="feature-card"><div class="feature-icon">🔘</div><div><h3>Meerkeuzevragen</h3><p>Kies uit vier antwoorden in plaats van zelf typen.</p></div></div>
+      <div class="feature-card"><div class="feature-icon">🌙</div><div><h3>Licht of donker</h3><p>Kies het thema dat prettig is voor jouw kind.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO STEPS -->
+<section style="background:var(--surface);padding:5rem 2rem">
+  <div class="container reveal">
+    <div class="section-label">Leren in stappen</div>
+    <h2 class="section-title">Eerst herkennen, dan weten</h2>
+    <p class="section-sub">Bij nieuwe sommen begin je met meerkeuzevragen, daarna schakel je over naar zelf typen.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-badge">Stap 1</div>
+        <h3>Beginnen met meerkeuze</h3>
+        <p>Bij nieuwe sommen of een nieuw onderdeel zie je vier antwoorden en kies je het goede. Dat geeft net even wat houvast bij iets onbekends en helpt om patronen te herkennen.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">Stap 2</div>
+        <h3>Zelf het antwoord invullen</h3>
+        <p>Zodra het begint te klikken, zet je de meerkeuze uit. Dan typt je kind het antwoord zelf in, en dat is het moment waarop het echt in het geheugen wordt opgeslagen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMART -->
+<section>
+  <div class="container reveal">
+    <div class="section-label">Slim systeem</div>
+    <h2 class="section-title">Oefent wat nodig is</h2>
+    <p class="section-sub">De app past zich aan op jouw kind.</p>
+    <div class="smart-box">
+      <p>De app onthoudt welke sommen goed gaan en welke nog lastig zijn. Sommen die fout of traag gaan komen vaker terug, sommen die snel goed gaan minder vaak. Zo oefent je kind precies wat nodig is, elke keer weer.</p>
+    </div>
+    <div class="pills">
+      <div class="pill">📱 Werkt op telefoon, tablet en computer</div>
+      <div class="pill">🔓 Geen account nodig</div>
+      <div class="pill">💸 Gratis</div>
+      <div class="pill">🚫 Geen reclame</div>
+      <div class="pill">💾 Voortgang opgeslagen op het apparaat</div>
+      <div class="pill">👨‍👩‍👧‍👦 Meerdere profielen voor het hele gezin</div>
+      <div class="pill">⏱️ Sessie duurt ongeveer 5 minuten</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section style="background:var(--surface);padding:5rem 2rem">
+  <div class="container reveal">
+    <div class="section-label">Installeren</div>
+    <h2 class="section-title">Zet de app op je beginscherm</h2>
+    <p class="section-sub">Hoofdrekenen werkt als een echte app op je telefoon of tablet, zonder iets te downloaden.</p>
+    <div class="install-grid">
+      <div class="install-card">
+        <h3>🍎 iPhone of iPad</h3>
+        <div class="install-steps">
+          <div class="install-step"><div class="install-step-num">1</div>Open de link in Safari</div>
+          <div class="install-step"><div class="install-step-num">2</div>Tik op het deelicoon (vierkantje met pijltje omhoog)</div>
+          <div class="install-step"><div class="install-step-num">3</div>Kies "Zet op beginscherm"</div>
+          <div class="install-step"><div class="install-step-num">4</div>Tik "Voeg toe"</div>
+        </div>
+      </div>
+      <div class="install-card">
+        <h3>🤖 Android</h3>
+        <div class="install-steps">
+          <div class="install-step"><div class="install-step-num">1</div>Open de link in Chrome</div>
+          <div class="install-step"><div class="install-step-num">2</div>Tik op de drie puntjes rechtsboven</div>
+          <div class="install-step"><div class="install-step-num">3</div>Kies "Toevoegen aan startscherm"</div>
+          <div class="install-step"><div class="install-step-num">4</div>Tik "Toevoegen"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section>
+  <div class="container reveal">
+    <div class="section-label">Achtergrond</div>
+    <h2 class="section-title">Waarom ik dit heb gemaakt</h2>
+    <div class="story">
+      <p>Ons zoontje Akira krijgt thuisonderwijs. Ik merkte al snel dat sommige sommen er makkelijk ingingen en andere helemaal niet. Ik zocht een app waar ik overzichtelijk kon instellen wat hij moest oefenen, maar die vond ik niet.</p>
+      <p>Dus bouwde ik hem zelf. Het idee erachter is simpel: hoofdrekenen gaat makkelijker als je sommen leert herkennen, net zoals je woorden herkent bij het lezen. Steeds dezelfde sommen herhalen totdat het automatisch gaat, dat werkt veel beter dan cijfers schrijven op papier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section style="background:var(--surface);padding:5rem 2rem">
+  <div class="container reveal">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Ideeën of feedback?</h2>
+    <div class="feedback-box">
+      <p>Heb je een idee voor een nieuwe functie, mis je iets, of werkt er iets niet goed? Laat het me weten! Alle feedback is welkom, hoe klein ook. De app wordt regelmatig verbeterd en jouw input helpt daar direct bij.</p>
+      <p>Stuur een berichtje via WhatsApp of spreek me gewoon aan. 😊</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<div class="cta-section">
+  <h2>Klaar om te beginnen?</h2>
+  <p>Gratis, geen account nodig, direct te gebruiken.</p>
+  <a class="btn-white" href="hoofdrekenen.html">▶ Open de app</a>
+</div>
+
+<footer>
+  Gemaakt met ❤️ voor thuisonderwijs
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
