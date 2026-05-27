@@ -480,7 +480,7 @@ function saveNewProfile(){
 document.getElementById('modal-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveNewProfile()});
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
 
-function buildPool(g,sel,size=80){const gen=GROUPS[g].generate,pool=[],seen=new Set();for(let i=0;i<800&&pool.length<size;i++){const s=gen(sel);if(!seen.has(s.q)){seen.add(s.q);pool.push(s)}}return pool}
+function buildPool(g,sel,size=80){const gen=GROUPS[g].generate,pool=[],seen=new Set();const maxTries=size*20;let tries=0;while(pool.length<size&&tries<maxTries){tries++;const s=gen(sel);if(!seen.has(s.q)){seen.add(s.q);pool.push(s)}}return pool}
 function pickW(g,pool){
   const w=pool.map(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;if(!p.count)return 3;if(avg<2000&&err<.15)return 1;if(avg>4000||err>.4)return 5;return 3});
   const tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0)return pool[i]}return pool[pool.length-1]
@@ -642,7 +642,7 @@ function renderOpGrid(){
 
 function renderProgressGrid(g){
   const sel=profile.groupSel[g]||GROUPS[g].defaultSel;
-  const pool=buildPool(g,sel,64),grid=document.getElementById('prog-grid');
+  const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
   const cols=Math.ceil(Math.sqrt(pool.length));grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
   pool.forEach(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;let color='var(--border)';if(p.count>0){if(avg<2000&&err<.15)color='var(--green)';else if(avg<3500&&err<.3)color='var(--amber)';else color='var(--red)'}const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.title=s.q;grid.appendChild(cell)})
 }
