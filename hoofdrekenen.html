@@ -16,8 +16,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 #app{width:100%;max-width:460px;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
 .screen{display:none;width:100%;flex-direction:column;align-items:center}
 .screen.active{display:flex}
-
-/* PROFILES */
 #profiles-screen{gap:1.25rem;padding:2rem 0}
 .profiles-logo{width:72px;height:72px;border-radius:20px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(10,30,90,.3)}
 .profiles-title{font-size:1.6rem;font-weight:700;letter-spacing:-.03em;text-align:center}
@@ -32,8 +30,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .profile-detail{font-size:.72rem;color:var(--text2);margin-top:1px}
 .add-profile-btn{width:100%;background:none;border:1.5px dashed var(--border);border-radius:16px;padding:.85rem;font-size:.9rem;font-weight:600;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:all .15s}
 .add-profile-btn:hover{border-color:var(--accent);color:var(--accent)}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:20px;padding:1.5rem;width:100%;max-width:360px;box-shadow:0 8px 40px rgba(0,0,0,.4)}
@@ -47,8 +43,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .modal-btn{flex:1;padding:.8rem;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;transition:all .15s}
 .modal-btn.cancel{background:var(--surface2);color:var(--text2)}
 .modal-btn.confirm{background:var(--accent);color:#fff}
-
-/* HOME */
 #home{gap:1.1rem;padding:1.5rem 0}
 .logo-wrap{width:80px;height:80px;border-radius:22px;overflow:hidden;box-shadow:0 4px 24px rgba(10,30,90,.3);flex-shrink:0}
 .profile-switcher{display:flex;align-items:center;gap:.6rem;width:100%;background:var(--surface);border-radius:14px;padding:.6rem 1rem;box-shadow:var(--shadow-sm);cursor:pointer;border:1px solid var(--border);transition:all .15s}
@@ -79,8 +73,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .menu-icon{font-size:1rem}
 .menu-card-text strong{display:block;font-size:.8rem;font-weight:600;color:var(--text)}
 .menu-card-text span{font-size:.65rem;color:var(--text2)}
-
-/* PRACTICE */
 #practice{justify-content:center;min-height:100vh;padding:0;position:relative}
 .top-bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:460px;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:var(--topbar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:10}
 .back-btn{background:none;border:none;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:3px;padding:0}
@@ -112,8 +104,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .np:active{background:var(--surface2);transform:scale(.93)}
 .np.np-del{font-size:1rem;color:var(--text2)}
 .np.np-ok{background:var(--accent);color:#fff;border-color:transparent;font-size:.9rem;font-weight:600}
-
-/* RESULTS */
 #results{gap:1.5rem;padding:2rem 1rem}
 .result-msg{text-align:center;font-size:1rem;color:var(--text2);line-height:1.5;background:var(--surface);border-radius:14px;padding:1rem;border:1px solid var(--border);width:100%}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;width:100%}
@@ -126,8 +116,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .btn-primary:active{background:var(--accent-h);transform:scale(.98)}
 .btn-secondary{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:.85rem;font-size:.95rem;font-weight:500;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .1s}
 .btn-secondary:active{transform:scale(.98)}
-
-/* PROGRESS */
 #progress-screen{gap:1.25rem;padding:2rem 1rem}
 .prog-grid-wrap{background:var(--surface);border-radius:18px;border:1px solid var(--border);padding:1rem;box-shadow:var(--shadow-sm);width:100%}
 .pg{display:grid;gap:4px;width:100%}
@@ -145,8 +133,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .session-level.begin{background:rgba(255,69,58,.12);color:var(--red)}
 .session-level.goed{background:rgba(255,159,10,.12);color:var(--amber)}
 .session-level.uitstekend{background:rgba(48,209,88,.12);color:var(--green)}
-
-/* SETTINGS */
 .settings-group{width:100%;background:var(--surface);border-radius:18px;border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm)}
 .setting-row{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.1rem;border-bottom:1px solid var(--border);gap:.5rem}
 .setting-row:last-child{border-bottom:none}
@@ -203,6 +189,16 @@ input:checked+.tog-track:before{transform:translateX(20px)}
     <div class="op-grid" id="op-grid"></div>
   </div>
   <button class="start-btn" onclick="startFromHome()">Begin oefenen</button>
+  <div id="home-tip" style="width:100%;background:linear-gradient(135deg,rgba(10,132,255,.12),rgba(2,218,212,.08));border:1px solid rgba(10,132,255,.2);border-radius:14px;padding:.85rem 1rem;cursor:pointer" onclick="showScreen('tips-screen')">
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <span id="home-tip-emoji" style="font-size:1.3rem">💡</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Tip</div>
+        <div id="home-tip-text" style="font-size:.78rem;color:var(--text);margin-top:1px;line-height:1.3"></div>
+      </div>
+      <span style="color:var(--text3);font-size:.85rem">›</span>
+    </div>
+  </div>
   <div class="menu-row">
     <div class="menu-card" onclick="showScreen('progress-screen')">
       <div class="menu-icon">📊</div>
@@ -293,6 +289,17 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   <button class="btn-secondary" onclick="showScreen('home')" style="margin-top:.5rem">Terug</button>
 </div>
 
+<!-- TIPS -->
+<div id="tips-screen" class="screen" style="gap:1rem;padding:2rem 1rem">
+  <div class="screen-title">Rekentrucjes</div>
+  <div style="font-size:.85rem;color:var(--text2);align-self:flex-start;margin-top:-.5rem">Handige manieren om sneller te rekenen</div>
+  <div style="width:100%;background:linear-gradient(135deg,rgba(48,209,88,.12),rgba(2,218,212,.08));border:1px solid rgba(48,209,88,.2);border-radius:14px;padding:.85rem 1rem;font-size:.82rem;color:var(--text);line-height:1.5">
+    Deze trucjes helpen je op weg als je vastloopt. Door veel te oefenen ga je de sommen vanzelf uit je hoofd kennen, dan heb je de trucjes niet meer nodig!
+  </div>
+  <div id="tips-list" style="display:flex;flex-direction:column;gap:.6rem;width:100%"></div>
+  <button class="btn-secondary" onclick="showScreen('home')">Terug</button>
+</div>
+
 <!-- SETTINGS -->
 <div id="settings-screen" class="screen" style="gap:1.5rem;padding:2rem 1rem">
   <div class="screen-title">Instellingen</div>
@@ -372,6 +379,23 @@ input:checked+.tog-track:before{transform:translateX(20px)}
     </div>
   </div>
   <div class="settings-group">
+    <div class="setting-row" onclick="toggleParentGuide()" style="cursor:pointer">
+      <div class="setting-left"><div class="setting-label">💡 Voor ouders: hoe werkt het?</div><div class="setting-sub">Tik voor uitleg en tips</div></div>
+      <span id="pg-arrow" style="color:var(--text3);font-size:.85rem">›</span>
+    </div>
+    <div id="parent-guide" style="display:none;padding:0 1.1rem 1rem;font-size:.82rem;color:var(--text2);line-height:1.6"></div>
+  </div>
+  <div class="settings-group">
+    <div class="setting-row">
+      <div class="setting-left"><div class="setting-label">Back-up maken</div><div class="setting-sub">Sla alle profielen op als bestand</div></div>
+      <button class="btn-secondary" style="width:auto;padding:.5rem 1rem" onclick="exportData()">Exporteer</button>
+    </div>
+    <div class="setting-row">
+      <div class="setting-left"><div class="setting-label">Back-up terugzetten</div><div class="setting-sub">Herstel profielen uit een bestand</div></div>
+      <button class="btn-secondary" style="width:auto;padding:.5rem 1rem" onclick="importData()">Importeer</button>
+    </div>
+  </div>
+  <div class="settings-group">
     <div class="setting-row">
       <div class="setting-left"><div class="setting-label">Voortgang wissen</div><div class="setting-sub">Alleen voor huidig profiel</div></div>
       <button class="danger-btn" onclick="clearProgress()">Wis</button>
@@ -403,40 +427,153 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 </div>
 
 <script>
-const GROUPS={
-  2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min'],generate(sel){const op=pf(sel);if(op==='plus'){const a=ri(1,8),b=ri(1,9-a);return{q:`${a} + ${b}`,a:a+b}}const a=ri(2,10),b=ri(1,a-1);return{q:`${a} − ${b}`,a:a-b}}},
-  3:{sub:'Tot 20',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'},{id:'dub',label:'Dubbelen'}],defaultSel:['plus','min'],generate(sel){const op=pf(sel);if(op==='dub'){const a=ri(2,10);return{q:`${a} + ${a}`,a:2*a}}if(op==='plus'){const a=ri(2,15),b=ri(2,20-a);return{q:`${a} + ${b}`,a:a+b}}const a=ri(5,20),b=ri(2,a-1);return{q:`${a} − ${b}`,a:a-b}}},
-  4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus','min','t2','t5','t10'],generate(sel){const op=pf(sel);if(op==='plus'){const a=ri(10,80),b=ri(5,99-a);return{q:`${a} + ${b}`,a:a+b}}if(op==='min'){const a=ri(20,99),b=ri(5,a-1);return{q:`${a} − ${b}`,a:a-b}}const t=parseInt(op.slice(1));const a=ri(1,10);return{q:`${a} × ${t}`,a:a*t}}},
-  5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),defaultSel:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],generate(sel){const op=pf(sel);const t=parseInt(op.slice(1));const a=ri(1,10);if(Math.random()<.4)return{q:`${a*t} ÷ ${t}`,a:a};return{q:`${a} × ${t}`,a:a*t}}},
-  6:{sub:'Groot+breuken',optLabel:'Rekenen met',options:[{id:'add',label:'+ groot'},{id:'mul',label:'× gemengd'},{id:'frac',label:'Breuken'}],defaultSel:['add','mul','frac'],generate(sel){const op=pf(sel);if(op==='add'){const a=ri(100,900),b=ri(10,999-a);return{q:`${a} + ${b}`,a:a+b}}if(op==='mul'){const a=ri(11,19),b=ri(2,9);return{q:`${a} × ${b}`,a:a*b}}return pk([{q:'½ + ¼',a:'¾'},{q:'½ + ½',a:'1'},{q:'¼ + ¼',a:'½'},{q:'¾ − ¼',a:'½'},{q:'1 − ¼',a:'¾'}])}},
-  7:{sub:'%, komma',optLabel:'Rekenen met',options:[{id:'pct',label:'Procenten'},{id:'dec',label:'Komma'},{id:'frac',label:'Breuken'}],defaultSel:['pct','dec','frac'],generate(sel){const op=pf(sel);if(op==='pct'){const p=pk([10,20,25,50,75]),b=pk([40,60,80,100,120,200,400]);return{q:`${p}% van ${b}`,a:Math.round(p/100*b)}}if(op==='dec'){const a=pk([0.5,0.25,0.1,1.5,2.5]),b=ri(2,20);return{q:`${a} × ${b}`,a:Math.round(a*b*100)/100}}return pk([{q:'¾ van 20',a:15},{q:'½ van 36',a:18},{q:'⅔ van 30',a:20},{q:'¾ van 40',a:30},{q:'¼ van 60',a:15}])}},
-  8:{sub:'Gemengd',optLabel:'Oefenen met',options:[{id:'g3',label:'Gr. 3'},{id:'g4',label:'Gr. 4'},{id:'g5',label:'Tafels'},{id:'g6',label:'Groot'},{id:'g7',label:'%,komma'}],defaultSel:['g3','g4','g5','g6','g7'],generate(sel){const op=pf(sel);const map={g3:3,g4:4,g5:5,g6:6,g7:7};return GROUPS[map[op]].generate(GROUPS[map[op]].defaultSel)}}
-};
+// ── CONSTANTEN ────────────────────────────────────────────────────────────────
 const EMOJIS=['🧒','👦','👧','🧑','👩','👨','🦊','🐻','🐼','🦁','🐯','🐸','🦋','⭐','🚀','🎮','🎨','🏆'];
 const AGE_MAP={jong:{tAuto:5,tGoed:8},mid:{tAuto:3,tGoed:6},oud:{tAuto:2,tGoed:4}};
+const BOX_DELAY={1:0,2:3,3:8,4:20,5:45};
 
+const KID_TIPS=[
+  {cat:'Optellen & aftrekken',items:[
+    {emoji:'🤝',titel:'Vriendjes van 10',tekst:'Leer welke getallen samen 10 maken: 1+9, 2+8, 3+7, 4+6, 5+5. Deze ken je het liefst uit je hoofd, je hebt ze overal voor nodig!'},
+    {emoji:'🔟',titel:'Maak eerst 10',tekst:'Bij 8 + 5: pak er eerst 2 bij om 10 te maken (8 + 2 = 10), tel dan de rest erbij (10 + 3 = 13).'},
+    {emoji:'🔄',titel:'Omdraaien mag',tekst:'3 + 9 is net zo veel als 9 + 3. Begin met het grootste getal, dan hoef je minder te tellen!'},
+    {emoji:'✌️',titel:'Dubbelen',tekst:'Ken je dubbelen goed: 6 + 6 = 12, 7 + 7 = 14. Die heb je vaak nodig.'},
+    {emoji:'👥',titel:'Buurman-sommen',tekst:'Als je 6 + 6 = 12 weet, dan is 6 + 7 gewoon één meer: 13. En 6 + 5 is één minder: 11.'},
+    {emoji:'⬇️',titel:'Aftrekken door verder tellen',tekst:'12 − 9? Tel vanaf 9 omhoog tot 12: dat zijn 3 stapjes. Het antwoord is 3!'}
+  ]},
+  {cat:'Tafels & delen',items:[
+    {emoji:'✌️',titel:'Tafel van 2 = dubbelen',tekst:'Keer 2 is gewoon dubbel. 7 × 2 is hetzelfde als 7 + 7 = 14.'},
+    {emoji:'4️⃣',titel:'Tafel van 4 = dubbel verdubbelen',tekst:'7 × 4? Doe eerst 7 × 2 = 14, en verdubbel dat: 14 + 14 = 28.'},
+    {emoji:'🖐️',titel:'Tafel van 5',tekst:'De tafel van 5 eindigt altijd op 0 of 5: 5, 10, 15, 20... En 5 is de helft van 10, dus 6 × 5 = de helft van 6 × 10 = 30.'},
+    {emoji:'9️⃣',titel:'Tafel van 9 = 10 min 1',tekst:'6 × 9? Doe 6 × 10 = 60, en haal er één keer 6 vanaf: 60 − 6 = 54.'},
+    {emoji:'🔟',titel:'Tafel van 10',tekst:'Bij keer 10 zet je er gewoon een 0 achter. 7 × 10 = 70!'},
+    {emoji:'➗',titel:'Delen is omgekeerd keer',tekst:'20 ÷ 4? Denk: hoe vaak past 4 in 20? 4 × 5 = 20, dus het antwoord is 5.'}
+  ]},
+  {cat:'Grote getallen & meer',items:[
+    {emoji:'🧮',titel:'Splits grote sommen',tekst:'34 + 25? Doe eerst de tientallen (30 + 20 = 50), dan de eenheden (4 + 5 = 9), samen 59.'},
+    {emoji:'🎯',titel:'Afronden en compenseren',tekst:'58 + 7? Doe 60 + 7 = 67, en haal er de 2 weer af die je te veel pakte: 65.'},
+    {emoji:'💯',titel:'Procenten via 10%',tekst:'10% is makkelijk: streep één nul weg. 10% van 80 = 8. Wil je 20%? Dan keer 2: 16.'},
+    {emoji:'½',titel:'De helft is 50%',tekst:'50% van iets is gewoon de helft. 50% van 60 = 30. En 25% is de helft daarvan: 15.'}
+  ]}
+];
+
+// ── VASTE SOMMEN-SETS ─────────────────────────────────────────────────────────
+function genSet(g,optId){
+  const out=[];
+  const add=(q,a)=>out.push({q,a,op:optId});
+  if(g===2){
+    if(optId==='plus'){for(let a=1;a<=9;a++)for(let b=1;a+b<=9;b++)add(`${a} + ${b}`,a+b)}
+    if(optId==='min'){for(let a=2;a<=10;a++)for(let b=1;b<a;b++)add(`${a} − ${b}`,a-b)}
+  }
+  if(g===3){
+    if(optId==='plus'){for(let a=2;a<=18;a++)for(let b=2;a+b<=20&&b<=a;b++)add(`${a} + ${b}`,a+b)}
+    if(optId==='min'){for(let a=5;a<=20;a++)for(let b=2;b<a;b++)add(`${a} − ${b}`,a-b)}
+    if(optId==='dub'){for(let a=2;a<=10;a++)add(`${a} + ${a}`,2*a)}
+  }
+  if(g===4){
+    if(optId==='plus'){for(let a=10;a<=80;a+=5)for(let b=5;a+b<=99;b+=5)add(`${a} + ${b}`,a+b)}
+    if(optId==='min'){for(let a=20;a<=99;a+=7)for(let b=5;b<a;b+=7)add(`${a} − ${b}`,a-b)}
+    if(optId==='t2'){for(let a=1;a<=10;a++)add(`${a} × 2`,a*2)}
+    if(optId==='t5'){for(let a=1;a<=10;a++)add(`${a} × 5`,a*5)}
+    if(optId==='t10'){for(let a=1;a<=10;a++)add(`${a} × 10`,a*10)}
+  }
+  if(g===5){const t=parseInt(optId.slice(1));for(let a=1;a<=10;a++)add(`${a} × ${t}`,a*t);for(let a=1;a<=10;a++)add(`${a*t} ÷ ${t}`,a)}
+  if(g===6){
+    if(optId==='add'){[[120,30],[250,40],[340,60],[450,150],[210,90],[170,80],[330,170],[260,140],[480,120],[150,250],[370,30],[290,110]].forEach(([a,b])=>add(`${a} + ${b}`,a+b))}
+    if(optId==='mul'){for(let a=11;a<=19;a++)for(let b=2;b<=9;b++)add(`${a} × ${b}`,a*b)}
+    if(optId==='frac'){[['½ + ¼','¾'],['½ + ½','1'],['¼ + ¼','½'],['¾ − ¼','½'],['1 − ¼','¾'],['1 − ½','½'],['¾ − ½','¼'],['¼ + ½','¾']].forEach(([q,a])=>add(q,a))}
+  }
+  if(g===7){
+    if(optId==='pct'){[10,20,25,50,75].forEach(p=>[40,60,80,100,120,200,400].forEach(b=>add(`${p}% van ${b}`,Math.round(p/100*b))))}
+    if(optId==='dec'){for(let b=2;b<=12;b++)[0.5,0.25,0.1,1.5,2.5].forEach(a=>add(`${a} × ${b}`,Math.round(a*b*100)/100))}
+    if(optId==='frac'){[['¾ van 20',15],['½ van 36',18],['⅔ van 30',20],['¾ van 40',30],['¼ van 60',15],['½ van 50',25],['⅓ van 30',10],['¾ van 80',60]].forEach(([q,a])=>add(q,a))}
+  }
+  if(g===8){const map={g3:3,g4:4,g5:5,g6:6,g7:7};const subG=map[optId];GROUPS[subG].options.forEach(o=>genSet(subG,o.id).forEach(s=>out.push(s)))}
+  return out;
+}
+
+const GROUPS={
+  2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min']},
+  3:{sub:'Tot 20',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'},{id:'dub',label:'Dubbelen'}],defaultSel:['plus','min']},
+  4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus','min','t2','t5','t10']},
+  5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),defaultSel:['t2','t3','t4','t5','t6','t7','t8','t9','t10']},
+  6:{sub:'Groot+breuken',optLabel:'Rekenen met',options:[{id:'add',label:'+ groot'},{id:'mul',label:'× gemengd'},{id:'frac',label:'Breuken'}],defaultSel:['add','mul','frac']},
+  7:{sub:'%, komma',optLabel:'Rekenen met',options:[{id:'pct',label:'Procenten'},{id:'dec',label:'Komma'},{id:'frac',label:'Breuken'}],defaultSel:['pct','dec','frac']},
+  8:{sub:'Gemengd',optLabel:'Oefenen met',options:[{id:'g3',label:'Gr. 3'},{id:'g4',label:'Gr. 4'},{id:'g5',label:'Tafels'},{id:'g6',label:'Groot'},{id:'g7',label:'%,komma'}],defaultSel:['g3','g4','g5','g6','g7']}
+};
+
+let _setCache={};
+function getFullSet(g,sel){
+  const key=g+':'+sel.join(',');
+  if(_setCache[key])return _setCache[key];
+  const seen=new Set(),out=[];
+  sel.forEach(optId=>genSet(g,optId).forEach(s=>{if(!seen.has(s.q)){seen.add(s.q);out.push(s)}}));
+  _setCache[key]=out;return out;
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
 function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function pk(a){return a[Math.floor(Math.random()*a.length)]}
-function pf(sel){return sel[Math.floor(Math.random()*sel.length)]}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function fmtTime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60);return`${m}:${String(s%60).padStart(2,'0')}`}
 function fmtDate(ts){const d=new Date(ts);return d.toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'})}
 
-function loadProfiles(){try{return JSON.parse(localStorage.getItem('hr_profiles'))||[]}catch{return[]}}
-function saveProfiles(){localStorage.setItem('hr_profiles',JSON.stringify(profiles))}
-function loadSettings(){try{return JSON.parse(localStorage.getItem('hr_settings'))||defSettings()}catch{return defSettings()}}
-function saveSettings(){localStorage.setItem('hr_settings',JSON.stringify(settings))}
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+function safeGet(key){try{return localStorage.getItem(key)}catch(e){return null}}
+function safeSet(key,val){try{localStorage.setItem(key,val);return true}catch(e){return false}}
+function loadProfiles(){try{return JSON.parse(safeGet('hr_profiles'))||[]}catch{return[]}}
+function saveProfiles(){safeSet('hr_profiles',JSON.stringify(profiles))}
+function loadSettings(){try{return JSON.parse(safeGet('hr_settings'))||defSettings()}catch{return defSettings()}}
+function saveSettings(){safeSet('hr_settings',JSON.stringify(settings))}
 function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark',tAuto:5,tGoed:8,age:'jong'}}
-function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus','min','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[]}}
+function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus','min','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[],seen:0}}
+
+// ── BACKUP ────────────────────────────────────────────────────────────────────
+function exportData(){
+  try{
+    const data={profiles,settings,exported:new Date().toISOString(),version:1};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=`hoofdrekenen-backup-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url)
+  }catch(e){alert('Exporteren mislukt.')}
+}
+function importData(){
+  const input=document.createElement('input');input.type='file';input.accept='application/json,.json';
+  input.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!data.profiles||!Array.isArray(data.profiles)){alert('Dit bestand bevat geen geldige back-up.');return}
+        if(!confirm(`Back-up van ${data.profiles.length} profiel(en) terugzetten?`))return;
+        profiles=data.profiles;if(data.settings)settings=data.settings;
+        saveProfiles();saveSettings();alert('Back-up succesvol teruggezet!');
+        activeProfileId=null;try{localStorage.removeItem('hr_active')}catch(e){}profile=null;
+        showScreen('profiles-screen')
+      }catch(err){alert('Het bestand kon niet worden gelezen.')}
+    };reader.readAsText(file)
+  };input.click()
+}
 
 let profiles=loadProfiles(),settings=loadSettings();
-let activeProfileId=localStorage.getItem('hr_active')||null;
+let activeProfileId=safeGet('hr_active')||null;
 let profile=null,currentGroup=2,currentSel=[];
 
+// ── PROGRESS ──────────────────────────────────────────────────────────────────
 function gk(g,q){return`${g}::${q}`}
-function upProgress(g,q,ok,ms){const k=gk(g,q),p=profile.progress[k]||{count:0,correct:0,times:[]};p.count++;if(ok)p.correct++;p.times.push(ms);if(p.times.length>10)p.times=p.times.slice(-10);profile.progress[k]=p;saveProfiles()}
-function clearProgress(){if(confirm('Voortgang wissen voor '+profile.name+'?')){profile.progress={};profile.sessions=[];saveProfiles()}}
+function getCard(g,q){return profile.progress[gk(g,q)]||{count:0,correct:0,times:[],box:1,lastSeen:-999}}
+function upProgress(g,q,ok,ms){
+  const k=gk(g,q),p=getCard(g,q);
+  p.count++;if(ok)p.correct++;p.times.push(ms);if(p.times.length>10)p.times=p.times.slice(-10);
+  if(ok)p.box=Math.min(5,(p.box||1)+1);else p.box=1;
+  p.lastSeen=profile.seen||0;
+  profile.progress[k]=p;saveProfiles()
+}
+function clearProgress(){if(confirm('Voortgang wissen voor '+profile.name+'?')){profile.progress={};profile.sessions=[];profile.seen=0;saveProfiles()}}
 
-function getResultMsg(pct,nC,total,avgMs){
+// ── RESULT MESSAGES ───────────────────────────────────────────────────────────
+function getResultMsg(pct,nC,total){
   if(pct===1)return{emoji:'🏆',title:'Perfecte score!',msg:`Alle ${total} sommen goed! Geweldig gedaan!`}
   if(pct>=.9)return{emoji:'🎉',title:'Bijna perfect!',msg:`${nC} van de ${total} goed! Nog een beetje oefenen!`}
   if(pct>=.75)return{emoji:'💪',title:'Goed bezig!',msg:`${nC} van de ${total} goed, ga zo door!`}
@@ -445,7 +582,7 @@ function getResultMsg(pct,nC,total,avgMs){
 }
 function sessionLevel(pct){if(pct>=.9)return{label:'Uitstekend',cls:'uitstekend'};if(pct>=.7)return{label:'Goed',cls:'goed'};return{label:'Beginnend',cls:'begin'}}
 
-// PROFILES
+// ── PROFILES ──────────────────────────────────────────────────────────────────
 function renderProfiles(){
   const list=document.getElementById('profile-list');list.innerHTML='';
   profiles.forEach(p=>{
@@ -458,62 +595,41 @@ function renderProfiles(){
   })
 }
 function selectProfile(id){
-  activeProfileId=id;localStorage.setItem('hr_active',id);
+  activeProfileId=id;safeSet('hr_active',id);
   profile=profiles.find(p=>p.id===id);
   if(!profile.sessions)profile.sessions=[];
+  if(profile.seen===undefined)profile.seen=0;
   currentGroup=profile.group||2;currentSel=profile.groupSel[currentGroup]||GROUPS[currentGroup].defaultSel;
   if(profile.age){settings.tAuto=profile.tAuto||5;settings.tGoed=profile.tGoed||8;settings.age=profile.age;saveSettings()}
   showScreen('home')
 }
 let deleteMode=false,deleteSelectedId=null;
-function toggleDeleteMode(){
-  deleteMode=true;deleteSelectedId=null;
-  document.getElementById('delete-mode-btn').style.display='none';
-  document.getElementById('delete-confirm-wrap').style.display='flex';
-  renderProfiles()
-}
-function cancelDeleteMode(){
-  deleteMode=false;deleteSelectedId=null;
-  document.getElementById('delete-mode-btn').style.display='block';
-  document.getElementById('delete-confirm-wrap').style.display='none';
-  renderProfiles()
-}
-function toggleDeleteSelect(id,item){
-  deleteSelectedId=id;
-  document.querySelectorAll('.profile-item').forEach(el=>el.style.borderColor='');
-  item.style.borderColor='var(--red)'
-}
+function toggleDeleteMode(){deleteMode=true;deleteSelectedId=null;document.getElementById('delete-mode-btn').style.display='none';document.getElementById('delete-confirm-wrap').style.display='flex';renderProfiles()}
+function cancelDeleteMode(){deleteMode=false;deleteSelectedId=null;document.getElementById('delete-mode-btn').style.display='block';document.getElementById('delete-confirm-wrap').style.display='none';renderProfiles()}
+function toggleDeleteSelect(id,item){deleteSelectedId=id;document.querySelectorAll('.profile-item').forEach(el=>el.style.borderColor='');item.style.borderColor='var(--red)'}
 function confirmDelete(){
   if(!deleteSelectedId){alert('Selecteer eerst een profiel.');return}
   const p=profiles.find(x=>x.id===deleteSelectedId);if(!p)return;
   if(!confirm(`Profiel "${p.name}" definitief verwijderen?`))return;
   profiles=profiles.filter(x=>x.id!==deleteSelectedId);saveProfiles();
-  if(activeProfileId===deleteSelectedId){activeProfileId=null;localStorage.removeItem('hr_active');profile=null}
+  if(activeProfileId===deleteSelectedId){activeProfileId=null;try{localStorage.removeItem('hr_active')}catch(e){}profile=null}
   deleteMode=false;deleteSelectedId=null;
   document.getElementById('delete-mode-btn').style.display='block';
   document.getElementById('delete-confirm-wrap').style.display='none';
   renderProfiles()
 }
 
-// MODAL
+// ── MODAL ─────────────────────────────────────────────────────────────────────
 let selectedEmoji=EMOJIS[0],selectedAge='jong';
 function selectProfileAge(age){
   selectedAge=age;
-  ['jong','mid','oud'].forEach(a=>{
-    const btn=document.getElementById(`p-age-${a}`);
-    if(a===age){btn.style.background='rgba(10,132,255,.15)';btn.style.color='var(--accent)';btn.style.border='1.5px solid var(--accent)'}
-    else{btn.style.background='var(--surface2)';btn.style.color='var(--text2)';btn.style.border='none'}
-  })
+  ['jong','mid','oud'].forEach(a=>{const btn=document.getElementById(`p-age-${a}`);if(a===age){btn.style.background='rgba(10,132,255,.15)';btn.style.color='var(--accent)';btn.style.border='1.5px solid var(--accent)'}else{btn.style.background='var(--surface2)';btn.style.color='var(--text2)';btn.style.border='none'}})
 }
 function openNewProfile(){
   selectedEmoji=EMOJIS[0];selectedAge='jong';
   document.getElementById('modal-name').value='';
   const eg=document.getElementById('emoji-grid');eg.innerHTML='';
-  EMOJIS.forEach(e=>{
-    const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;
-    btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};
-    eg.appendChild(btn)
-  });
+  EMOJIS.forEach(e=>{const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};eg.appendChild(btn)});
   selectProfileAge('jong');
   document.getElementById('modal').classList.add('open');
   setTimeout(()=>document.getElementById('modal-name').focus(),100)
@@ -531,30 +647,36 @@ function saveNewProfile(){
 document.getElementById('modal-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveNewProfile()});
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
 
-// POOL
-function buildPool(g,sel,size=48){
-  const gen=GROUPS[g].generate,pool=[],seen=new Set();
-  const maxTries=size*20;let tries=0;
-  while(pool.length<size&&tries<maxTries){tries++;const s=gen(sel);if(!seen.has(s.q)){seen.add(s.q);pool.push(s)}}
-  return pool
-}
-function pickW(g,pool){
-  const tAuto=(settings.tAuto||5)*1000;
-  const w=pool.map(s=>{const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};const avg=p.times.length?p.times.reduce((a,b)=>a+b,0)/p.times.length:9999;const err=p.count>0?(p.count-p.correct)/p.count:0;if(!p.count)return 3;if(avg<tAuto&&err<.15)return 1;if(avg>tAuto*2||err>.4)return 5;return 3});
-  const tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot;
-  for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0)return pool[i]}
-  return pool[pool.length-1]
+// ── LEITNER SESSIE ────────────────────────────────────────────────────────────
+function buildSession(g,sel,count){
+  const full=getFullSet(g,sel);
+  const now=profile.seen||0;
+  const scored=full.map(s=>{
+    const p=getCard(g,s.q);
+    const box=p.box||1,delay=BOX_DELAY[box]||0;
+    const sinceSeen=now-(p.lastSeen===-999?-9999:p.lastSeen);
+    const due=sinceSeen>=delay;
+    let prio;
+    if(!p.count)prio=100;
+    else if(box<=2)prio=80;
+    else prio=Math.min(60,sinceSeen-delay);
+    return{s,due,prio}
+  });
+  const dueCards=scored.filter(x=>x.due).sort((a,b)=>b.prio-a.prio);
+  const pool=[];
+  for(const c of dueCards){if(pool.length>=count)break;pool.push(c.s)}
+  if(pool.length<count){const rest=shuffle(scored.filter(x=>!pool.includes(x.s)).map(x=>x.s));for(const s of rest){if(pool.length>=count)break;pool.push(s)}}
+  return shuffle(pool.slice(0,count))
 }
 
-// SESSION
+// ── SESSION ───────────────────────────────────────────────────────────────────
 let session={soms:[],idx:0,results:[],somStart:0,sessionStart:0};
 let typedAns='',waitingNext=false,cdTO=null,cdIV=null,swIV=null,audioCtx=null;
 
 function startFromHome(){currentSel=profile.groupSel[currentGroup]||GROUPS[currentGroup].defaultSel;profile.group=currentGroup;saveProfiles();startSession(currentGroup,currentSel)}
 function startSession(g,sel){
   currentGroup=g;currentSel=sel;profile.groupSel[g]=sel;profile.group=g;saveProfiles();
-  const count=settings.sessionCount,pool=buildPool(g,sel,Math.max(count*3,48)),soms=[];
-  for(let i=0;i<count;i++)soms.push(pickW(g,pool));
+  const soms=buildSession(g,sel,settings.sessionCount);
   session={soms,idx:0,results:[],somStart:0,sessionStart:Date.now()};
   typedAns='';waitingNext=false;showScreen('practice');resetSW();buildInputUI();setTimeout(showSom,100)
 }
@@ -582,7 +704,7 @@ function handleInput(ch){
   else{
     if(typedAns.length>=8)return;
     typedAns+=ch;
-    if(settings.auto&&typedAns.length>0){
+    if(settings.auto){
       const correct=String(s.a);
       if(typedAns===correct){checkTyped(typedAns);return}
       if(typedAns.length>=correct.length&&typedAns!==correct){checkTyped(typedAns);return}
@@ -590,6 +712,8 @@ function handleInput(ch){
   }
   document.getElementById('typed-ans').textContent=typedAns
 }
+
+function advance(){profile.seen=(profile.seen||0)+1;saveProfiles();session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}}
 
 function checkTyped(ans){
   if(waitingNext)return;
@@ -604,8 +728,7 @@ function checkTyped(ans){
     document.getElementById('answer-box').className='answer-box correct-ans';
     document.getElementById('typed-ans').textContent=ans;
     document.getElementById('cursor').style.display='none';
-    playTone(880,80);
-    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},600)
+    playTone(880,80);setTimeout(advance,600)
   } else {
     document.getElementById('answer-box').className='answer-box wrong-ans';
     document.getElementById('typed-ans').textContent=ans;
@@ -613,7 +736,7 @@ function checkTyped(ans){
     document.getElementById('question').classList.add('flash-red');
     playTone(220,150);
     setTimeout(()=>{document.getElementById('answer-box').className='answer-box show-correct-ans';document.getElementById('typed-ans').textContent=s.a},400);
-    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1800)
+    setTimeout(advance,1800)
   }
 }
 
@@ -624,12 +747,9 @@ function renderChoices(s){
   grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:1rem;width:100%;padding:0 1rem;box-sizing:border-box';
   choices.forEach(c=>{
     const btn=document.createElement('button');
-    btn.style.cssText='background:var(--surface2);border:1.5px solid rgba(255,255,255,.08);border-radius:28px;font-size:2.5rem;font-weight:700;cursor:pointer;text-align:center;color:var(--text);width:100%;min-height:140px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;box-sizing:border-box';
-    btn.textContent=c;
-    btn.onclick=()=>{if(!waitingNext)handleChoice(c,s,btn,grid)};
-    grid.appendChild(btn)
-  });
-  area.appendChild(grid)
+    btn.style.cssText='background:var(--surface2);border:1.5px solid rgba(255,255,255,.08);border-radius:28px;font-size:2.5rem;font-weight:700;cursor:pointer;color:var(--text);width:100%;min-height:140px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;box-sizing:border-box';
+    btn.textContent=c;btn.onclick=()=>{if(!waitingNext)handleChoice(c,s,btn,grid)};grid.appendChild(btn)
+  });area.appendChild(grid)
 }
 function clearChoices(){document.getElementById('choice-area').innerHTML=''}
 function handleChoice(chosen,s,btn,grid){
@@ -638,25 +758,19 @@ function handleChoice(chosen,s,btn,grid){
   const isOk=String(chosen)===String(s.a)||parseFloat(chosen)===s.a;
   upProgress(currentGroup,s.q,isOk,ms);session.results.push({q:s.q,a:s.a,given:chosen,correct:isOk,ms});
   waitingNext=true;
-  btn.style.background=isOk?'rgba(48,209,88,.25)':'rgba(255,69,58,.2)';
-  btn.style.color=isOk?'#30d158':'#ff453a';
+  btn.style.background=isOk?'rgba(48,209,88,.25)':'rgba(255,69,58,.2)';btn.style.color=isOk?'#30d158':'#ff453a';
   if(!isOk){
     grid.querySelectorAll('button').forEach(b=>{if(String(b.textContent)===String(s.a)||parseFloat(b.textContent)===s.a){b.style.background='rgba(48,209,88,.25)';b.style.color='#30d158'}});
-    document.getElementById('question').classList.add('flash-red');playTone(220,150);
-    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1600)
-  } else {
-    document.getElementById('question').classList.add('flash-green');playTone(880,80);
-    setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},600)
-  }
+    document.getElementById('question').classList.add('flash-red');playTone(220,150);setTimeout(advance,1600)
+  }else{document.getElementById('question').classList.add('flash-green');playTone(880,80);setTimeout(advance,600)}
 }
 
 function makeChoices(correct){
   const ans=typeof correct==='number'?correct:parseFloat(correct)||correct;
   const set=new Set([ans]);
-  for(let t=0;t<100&&set.size<4;t++){let fake;if(typeof ans==='number'){const off=pk([1,2,3,4,5,6,7,8,9,10]);fake=ans+(Math.random()<.5?off:-off);if(Number.isInteger(ans))fake=Math.round(fake);else fake=Math.round(fake*100)/100}else{fake=pk(['¼','½','¾','1','1½','2','⅔','⅓'].filter(x=>x!==ans))}if(!set.has(fake))set.add(fake)}
+  for(let t=0;t<100&&set.size<4;t++){let fake;if(typeof ans==='number'){const off=ri(1,10);fake=ans+(Math.random()<.5?off:-off);if(Number.isInteger(ans))fake=Math.round(fake);else fake=Math.round(fake*100)/100}else{const opts=['¼','½','¾','1','1½','2','⅔','⅓'].filter(x=>x!==ans);fake=opts[ri(0,opts.length-1)]}if(fake!==undefined&&!set.has(fake))set.add(fake)}
   return shuffle([...set])
 }
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
 function handleWrongTimeout(){
   if(waitingNext)return;waitingNext=true;
@@ -665,8 +779,7 @@ function handleWrongTimeout(){
   stopSW();document.getElementById('question').classList.add('flash-red');
   if(settings.mc){const grid=document.querySelector('#choice-area div');if(grid)grid.querySelectorAll('button').forEach(b=>{if(String(b.textContent)===String(s.a)||parseFloat(b.textContent)===s.a){b.style.background='rgba(48,209,88,.25)';b.style.color='#30d158'}})}
   else{document.getElementById('answer-box').className='answer-box show-correct-ans';document.getElementById('typed-ans').textContent=s.a;document.getElementById('cursor').style.display='none'}
-  playTone(220,150);
-  setTimeout(()=>{session.idx++;if(session.idx>=session.soms.length){endSession(true)}else{showSom()}},1800)
+  playTone(220,150);setTimeout(advance,1800)
 }
 
 function endSession(completed){
@@ -677,8 +790,8 @@ function endSession(completed){
   const avgMs=total?Math.round(res.reduce((a,b)=>a+b.ms,0)/total):0;
   const tAuto=(settings.tAuto||5)*1000;
   const nF=res.filter(r=>r.correct&&r.ms<tAuto).length;
-  const pct=nC/total;
-  const {emoji,title,msg}=getResultMsg(pct,nC,total,avgMs);
+  const pct=total?nC/total:0;
+  const {emoji,title,msg}=getResultMsg(pct,nC,total);
   const lvl=sessionLevel(pct);
   const selLabel=currentSel.map(id=>{const opt=GROUPS[currentGroup].options.find(o=>o.id===id);return opt?opt.label:id}).join(', ');
   profile.sessions.unshift({ts:Date.now(),group:currentGroup,sel:selLabel,nC,total,avgMs,pct,level:lvl.label,levelCls:lvl.cls});
@@ -691,35 +804,28 @@ function endSession(completed){
   document.getElementById('r-time').textContent=fmtTime(avgMs);
   document.getElementById('r-speed').textContent=nF;
   const b=document.getElementById('r-improved');
-  if(nF>=Math.ceil(total*.6)){b.textContent=`${nF} sommen onder ${settings.tAuto||5} seconden!`;b.style.display=''}else b.style.display='none';
+  if(nF>=Math.ceil(total*.6)&&total>0){b.textContent=`${nF} sommen onder ${settings.tAuto||5} seconden!`;b.style.display=''}else b.style.display='none';
   showScreen('results')
 }
 
-// STOPWATCH & COUNTDOWN
+// ── STOPWATCH & COUNTDOWN ─────────────────────────────────────────────────────
 function startSW(){if(!settings.sw)return;const el=document.getElementById('sw-up');el.style.display='block';const s0=Date.now();clearInterval(swIV);swIV=setInterval(()=>{const ms=Date.now()-s0,s=Math.floor(ms/1000);el.textContent=fmtTime(ms);el.style.color=s<5?'var(--accent)':s<10?'var(--amber)':'var(--red)'},100)}
 function stopSW(){clearInterval(swIV)}
 function resetSW(){stopSW();const el=document.getElementById('sw-up');el.textContent='0:00';el.style.display='none'}
 function startCD(){if(!settings.cd)return;const wrap=document.getElementById('cd-wrap');wrap.classList.add('visible');const fill=document.getElementById('cd-fill'),lbl=document.getElementById('cd-label');const total=settings.cdSec*1000,start=Date.now();fill.style.transition='none';fill.style.width='100%';lbl.textContent=`${settings.cdSec}s`;setTimeout(()=>{fill.style.transition=`width ${total}ms linear`;fill.style.width='0%'},30);clearInterval(cdIV);clearTimeout(cdTO);cdIV=setInterval(()=>{const rem=Math.max(0,settings.cdSec-Math.floor((Date.now()-start)/1000));lbl.textContent=`${rem}s`;fill.style.background=rem>Math.ceil(settings.cdSec*.35)?'var(--amber)':'var(--red)'},200);cdTO=setTimeout(()=>{if(!waitingNext)handleWrongTimeout()},total)}
 function stopCD(){clearTimeout(cdTO);clearInterval(cdIV);document.getElementById('cd-wrap').classList.remove('visible')}
 
-// INPUT
+// ── INPUT ─────────────────────────────────────────────────────────────────────
 function buildInputUI(){
   const np=document.getElementById('numpad'),ca=document.getElementById('choice-area'),ab=document.getElementById('answer-box');
   ca.innerHTML='';
   if(settings.mc){np.style.display='none';ab.style.display='none';return}
-  ab.style.display='flex';
-  np.style.display='grid';np.innerHTML='';
-  [1,2,3,4,5,6,7,8,9,'del',0,'ok'].forEach(b=>{
-    const btn=document.createElement('button');btn.className='np';
-    if(b==='del'){btn.innerHTML='⌫';btn.classList.add('np-del');btn.onclick=()=>handleInput('del')}
-    else if(b==='ok'){btn.textContent='OK';btn.classList.add('np-ok');btn.onclick=()=>handleInput('enter')}
-    else{btn.textContent=b;btn.onclick=()=>handleInput(String(b))}
-    np.appendChild(btn)
-  })
+  ab.style.display='flex';np.style.display='grid';np.innerHTML='';
+  [1,2,3,4,5,6,7,8,9,'del',0,'ok'].forEach(b=>{const btn=document.createElement('button');btn.className='np';if(b==='del'){btn.innerHTML='⌫';btn.classList.add('np-del');btn.onclick=()=>handleInput('del')}else if(b==='ok'){btn.textContent='OK';btn.classList.add('np-ok');btn.onclick=()=>handleInput('enter')}else{btn.textContent=b;btn.onclick=()=>handleInput(String(b))}np.appendChild(btn)})
 }
-function playTone(freq,dur){if(!settings.sound)return;try{if(!audioCtx)audioCtx=new AudioContext();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=freq;g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+dur/1000)}catch(e){}}
+function playTone(freq,dur){if(!settings.sound)return;try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=freq;g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+dur/1000)}catch(e){}}
 
-// THEME & SETTINGS
+// ── THEME & SETTINGS ──────────────────────────────────────────────────────────
 function setTheme(t){settings.theme=t;saveSettings();document.documentElement.setAttribute('data-theme',t);document.getElementById('th-light').classList.toggle('active',t==='light');document.getElementById('th-dark').classList.toggle('active',t==='dark')}
 function setAge(age){
   const v=AGE_MAP[age];settings.tAuto=v.tAuto;settings.tGoed=v.tGoed;settings.age=age;saveSettings();
@@ -750,10 +856,14 @@ function syncSettings(){
   setTheme(s.theme)
 }
 
-// HOME
+// ── HOME ──────────────────────────────────────────────────────────────────────
 function renderHome(){
   document.getElementById('home-avatar').textContent=profile.emoji;
   document.getElementById('home-name').textContent=profile.name;
+  const allTips=KID_TIPS.flatMap(g=>g.items);
+  const tip=allTips[Math.floor(Math.random()*allTips.length)];
+  document.getElementById('home-tip-emoji').textContent=tip.emoji;
+  document.getElementById('home-tip-text').textContent=tip.titel;
   const gg=document.getElementById('group-grid');gg.innerHTML='';
   Object.keys(GROUPS).forEach(g=>{const n=Number(g),info=GROUPS[n];const btn=document.createElement('button');btn.className='group-btn'+(n===currentGroup?' sel':'');btn.innerHTML=`<div class="gb-num">Gr.${n}</div><div class="gb-sub">${info.sub}</div>`;btn.onclick=()=>{currentGroup=n;currentSel=profile.groupSel[n]||info.defaultSel;renderHome()};gg.appendChild(btn)});
   renderOpGrid();syncSettings()
@@ -765,12 +875,51 @@ function renderOpGrid(){
   g.options.forEach(opt=>{const chip=document.createElement('button');chip.className='op-chip'+(sel.includes(opt.id)?' sel':'');chip.textContent=opt.label;chip.onclick=()=>{let cur=[...(profile.groupSel[currentGroup]||[...g.defaultSel])];if(cur.includes(opt.id)){if(cur.length===1)return;cur=cur.filter(x=>x!==opt.id)}else cur.push(opt.id);profile.groupSel[currentGroup]=cur;currentSel=cur;saveProfiles();renderOpGrid()};grid.appendChild(chip)})
 }
 
-// PROGRESS
+// ── TIPS ──────────────────────────────────────────────────────────────────────
+function renderTips(){
+  const list=document.getElementById('tips-list');list.innerHTML='';
+  KID_TIPS.forEach(groep=>{
+    const header=document.createElement('div');
+    header.style.cssText='font-size:.7rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-top:.5rem;margin-bottom:.1rem';
+    header.textContent=groep.cat;list.appendChild(header);
+    groep.items.forEach(t=>{
+      const card=document.createElement('div');
+      card.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:var(--shadow-sm);display:flex;gap:.75rem;align-items:flex-start';
+      card.innerHTML=`<span style="font-size:1.5rem;flex-shrink:0">${t.emoji}</span><div><div style="font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.2rem">${t.titel}</div><div style="font-size:.82rem;color:var(--text2);line-height:1.5">${t.tekst}</div></div>`;
+      list.appendChild(card)
+    })
+  })
+}
+
+// ── OUDERGIDS ─────────────────────────────────────────────────────────────────
+let pgOpen=false;
+function toggleParentGuide(){
+  pgOpen=!pgOpen;
+  const el=document.getElementById('parent-guide'),arrow=document.getElementById('pg-arrow');
+  if(pgOpen){
+    el.style.display='block';arrow.textContent='⌄';
+    el.innerHTML=`<p style="margin-bottom:.75rem"><strong style="color:var(--text)">Waarom deze app werkt</strong></p>
+    <p style="margin-bottom:.75rem">De app is gebouwd op drie bewezen leerprincipes uit de cognitieve wetenschap:</p>
+    <p style="margin-bottom:.5rem">🔁 <strong style="color:var(--text)">Herhaling op het juiste moment.</strong> Sommen die goed gaan komen steeds minder vaak terug, sommen die lastig zijn juist vaker. Zo onthoudt je kind ze langer.</p>
+    <p style="margin-bottom:.5rem">✍️ <strong style="color:var(--text)">Zelf het antwoord ophalen.</strong> Het antwoord uit je hoofd halen versterkt het geheugen het meest. Daarom is zelf typen beter dan meerkeuze.</p>
+    <p style="margin-bottom:.75rem">⚡ <strong style="color:var(--text)">Directe feedback.</strong> Meteen weten of iets goed is, helpt het leren.</p>
+    <p style="margin-bottom:.75rem">Het doel is dat rekenfeiten automatisch worden — zoals je je eigen naam weet, zonder nadenken. Onderzoek laat zien dat dit het werkgeheugen vrijmaakt voor moeilijkere sommen.</p>
+    <p style="margin-bottom:.5rem"><strong style="color:var(--text)">Belangrijk om te weten</strong></p>
+    <p style="margin-bottom:.75rem">De app traint automatiseren, niet begrip. Begrip — waaróm werkt rekenen zo? — moet ook ergens vandaan komen: van jou, van lesmateriaal, van concrete voorwerpen. De app is het sterkst als aanvulling op het echte leren.</p>
+    <p style="margin-bottom:.5rem"><strong style="color:var(--text)">Tips voor thuis</strong></p>
+    <p style="margin-bottom:.4rem">• Kort en vaak werkt het best: liever 5 minuten per dag dan een half uur in het weekend.</p>
+    <p style="margin-bottom:.4rem">• Fouten horen erbij. Begin met meerkeuze bij nieuwe sommen, schakel daarna over op zelf typen.</p>
+    <p style="margin-bottom:.4rem">• Snelheid komt vanzelf. Laat je kind eerst rustig de sommen leren, zet de timer pas later aan.</p>
+    <p>• Volg de kleuren in Voortgang: groen betekent dat een som automatisch gaat.</p>`
+  }else{el.style.display='none';arrow.textContent='›'}
+}
+
+// ── PROGRESS SCHERM ───────────────────────────────────────────────────────────
 function renderProgressGrid(g,sel){
   if(!sel)sel=GROUPS[g].defaultSel;
-  const pool=buildPool(g,sel,48),grid=document.getElementById('prog-grid');
+  const pool=getFullSet(g,sel),grid=document.getElementById('prog-grid');
   const tAuto=(settings.tAuto||5)*1000,tGoed=(settings.tGoed||8)*1000;
-  const cols=Math.min(6,Math.ceil(Math.sqrt(pool.length)));
+  const cols=Math.min(6,Math.max(4,Math.ceil(Math.sqrt(pool.length))));
   grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;grid.innerHTML='';
   pool.forEach(s=>{
     const p=profile.progress[gk(g,s.q)]||{count:0,correct:0,times:[]};
@@ -778,8 +927,7 @@ function renderProgressGrid(g,sel){
     const err=p.count>0?(p.count-p.correct)/p.count:0;
     let color='var(--surface2)',textColor='var(--text3)';
     if(p.count>0){if(avg<tAuto&&err<.15){color='var(--green)';textColor='#fff'}else if(avg<tGoed&&err<.3){color='var(--amber)';textColor='#fff'}else{color='var(--red)';textColor='#fff'}}
-    const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;
-    grid.appendChild(cell)
+    const cell=document.createElement('div');cell.className='pc';cell.style.background=color;cell.style.color=textColor;cell.textContent=s.q;grid.appendChild(cell)
   })
 }
 
@@ -787,16 +935,15 @@ function renderProgressScreen(){
   const tAuto=(settings.tAuto||5)*1000,tGoed=(settings.tGoed||8)*1000;
   const levelHTML=Object.keys(GROUPS).map(g=>{
     const n=Number(g);
-    const sel=GROUPS[n].defaultSel;
-    const pool=buildPool(n,sel,48);
+    const pool=getFullSet(n,GROUPS[n].defaultSel);
     const total=pool.length;
     const groen=pool.filter(s=>{const p=profile.progress[gk(n,s.q)];if(!p||!p.count)return false;const avg=p.times.reduce((a,b)=>a+b,0)/p.times.length;const err=(p.count-p.correct)/p.count;return avg<tAuto&&err<.15}).length;
     const geel=pool.filter(s=>{const p=profile.progress[gk(n,s.q)];if(!p||!p.count)return false;const avg=p.times.reduce((a,b)=>a+b,0)/p.times.length;const err=(p.count-p.correct)/p.count;return!(avg<tAuto&&err<.15)&&avg<tGoed&&err<.3}).length;
-    const nietGeoefend=pool.filter(s=>!profile.progress[gk(n,s.q)]||!profile.progress[gk(n,s.q)].count).length;
-    if(nietGeoefend===total)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div></div><div style="font-size:.68rem;color:var(--text3);margin-top:4px">Nog niet geoefend</div></div>`;
+    const nieuw=pool.filter(s=>!profile.progress[gk(n,s.q)]||!profile.progress[gk(n,s.q)].count).length;
+    if(nieuw===total)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div></div><div style="font-size:.68rem;color:var(--text3);margin-top:4px">Nog niet geoefend · ${total} sommen</div></div>`;
     const pct=Math.round(groen/total*100);
     const barColor=pct>=80?'var(--green)':pct>=40?'var(--amber)':'var(--red)';
-    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:${barColor}">${pct}%</div></div><div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px"></div></div><div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">🟢 ${groen} automatisch · 🟡 ${geel} oefenen · ⬜ ${nietGeoefend} nieuw</div></div>`
+    return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:${barColor}">${pct}%</div></div><div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px"></div></div><div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">🟢 ${groen} · 🟡 ${geel} · ⬜ ${nieuw} van ${total}</div></div>`
   }).join('');
   document.getElementById('level-row').innerHTML=levelHTML;
 
@@ -806,10 +953,7 @@ function renderProgressScreen(){
     const opWrap=document.getElementById('prog-op-grid');opWrap.innerHTML='';
     GROUPS[g].options.forEach(opt=>{
       const chip=document.createElement('button');chip.className='op-chip'+(progSel===opt.id?' sel':'');chip.textContent=opt.label;
-      chip.onclick=()=>{
-        if(progSel===opt.id){progSel=null;chip.classList.remove('sel');renderProgressGrid(g,GROUPS[g].defaultSel)}
-        else{progSel=opt.id;opWrap.querySelectorAll('.op-chip').forEach(c=>c.classList.remove('sel'));chip.classList.add('sel');renderProgressGrid(g,[opt.id])}
-      };
+      chip.onclick=()=>{if(progSel===opt.id){progSel=null;chip.classList.remove('sel');renderProgressGrid(g,GROUPS[g].defaultSel)}else{progSel=opt.id;opWrap.querySelectorAll('.op-chip').forEach(c=>c.classList.remove('sel'));chip.classList.add('sel');renderProgressGrid(g,[opt.id])}};
       opWrap.appendChild(chip)
     })
   }
@@ -833,16 +977,17 @@ function renderProgressScreen(){
   })
 }
 
-// NAVIGATION
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(id==='profiles-screen')renderProfiles();
   if(id==='home'&&profile)renderHome();
   if(id==='progress-screen')renderProgressScreen();
+  if(id==='tips-screen')renderTips();
 }
 
-// KEYBOARD
+// ── KEYBOARD ──────────────────────────────────────────────────────────────────
 document.addEventListener('keydown',e=>{
   if(!document.getElementById('practice').classList.contains('active')||settings.mc)return;
   if(e.key>='0'&&e.key<='9'){handleInput(e.key);e.preventDefault()}
@@ -852,10 +997,10 @@ document.addEventListener('keydown',e=>{
 document.getElementById('hidden-input').addEventListener('input',function(){const v=this.value;this.value='';for(const c of v)if(c>='0'&&c<='9')handleInput(c)});
 document.addEventListener('click',e=>{if(!document.getElementById('practice').classList.contains('active'))return;if(!settings.mc&&!e.target.classList.contains('np')&&!e.target.classList.contains('back-btn'))setTimeout(focusInput,50)});
 
-// INIT
+// ── INIT ──────────────────────────────────────────────────────────────────────
 document.documentElement.setAttribute('data-theme',settings.theme||'dark');
 profile=profiles.find(p=>p.id===activeProfileId)||null;
-if(profile){if(!profile.sessions)profile.sessions=[];selectProfile(profile.id)}else showScreen('profiles-screen');
+if(profile){if(!profile.sessions)profile.sessions=[];if(profile.seen===undefined)profile.seen=0;selectProfile(profile.id)}else showScreen('profiles-screen');
 </script>
 </body>
 </html>
