@@ -161,19 +161,15 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 
 <!-- PROFILES -->
 <div id="profiles-screen" class="screen active">
-  <div style="display:flex;gap:.5rem;align-self:flex-end;margin-bottom:.5rem">
-    <button id="lang-nl" onclick="setLang('nl')" style="background:none;border:none;cursor:pointer;font-size:1.3rem;opacity:1">🇳🇱</button>
-    <button id="lang-en" onclick="setLang('en')" style="background:none;border:none;cursor:pointer;font-size:1.3rem;opacity:.4">🇬🇧</button>
-  </div>
   <div class="profiles-logo"><img src="apple-touch-icon.png" width="72" height="72" style="display:block"></div>
-  <div class="profiles-title" id="txt-appTitle">Hoofdrekenen</div>
-  <div class="profiles-sub" id="txt-chooseProfile">Kies jouw profiel</div>
+  <div class="profiles-title">Hoofdrekenen</div>
+  <div class="profiles-sub">Kies jouw profiel</div>
   <div class="profile-list" id="profile-list"></div>
-  <button class="add-profile-btn" onclick="openNewProfile()" id="txt-newProfile">＋ Nieuw profiel aanmaken</button>
-  <button id="delete-mode-btn" class="danger-btn" style="font-size:.9rem;padding:.6rem 0;width:100%;text-align:center" onclick="toggleDeleteMode()" id="txt-deleteProfile">Profiel verwijderen</button>
+  <button class="add-profile-btn" onclick="openNewProfile()">＋ Nieuw profiel aanmaken</button>
+  <button id="delete-mode-btn" class="danger-btn" style="font-size:.9rem;padding:.6rem 0;width:100%;text-align:center" onclick="toggleDeleteMode()">Profiel verwijderen</button>
   <div id="delete-confirm-wrap" style="display:none;width:100%;flex-direction:column;gap:.4rem">
-    <button class="btn-primary" style="background:var(--red)" onclick="confirmDelete()" id="txt-deleteConfirm">Verwijder geselecteerde profiel</button>
-    <button class="btn-secondary" onclick="cancelDeleteMode()" id="txt-cancel">Annuleer</button>
+    <button class="btn-primary" style="background:var(--red)" onclick="confirmDelete()">Verwijder geselecteerde profiel</button>
+    <button class="btn-secondary" onclick="cancelDeleteMode()">Annuleer</button>
   </div>
 </div>
 
@@ -753,19 +749,12 @@ function sessionLevel(pct){if(pct>=.9)return{label:'Uitstekend',cls:'uitstekend'
 
 // ── PROFILES ──────────────────────────────────────────────────────────────────
 function renderProfiles(){
-  // Update statische teksten
-  document.getElementById('txt-appTitle').textContent=t('appTitle');
-  document.getElementById('txt-chooseProfile').textContent=t('chooseProfile');
-  document.getElementById('txt-newProfile').textContent=t('newProfile');
-  document.getElementById('txt-deleteProfile').textContent=t('deleteProfile');
-  document.getElementById('txt-deleteConfirm').textContent=t('deleteConfirm');
-  document.getElementById('txt-cancel').textContent=t('cancel');
   const list=document.getElementById('profile-list');list.innerHTML='';
   profiles.forEach(p=>{
     const total=Object.keys(p.progress||{}).length;
     const good=Object.values(p.progress||{}).filter(v=>v.count>0&&v.correct/v.count>=.8).length;
     const item=document.createElement('div');item.className='profile-item'+(p.id===activeProfileId?' active-profile':'');
-    item.innerHTML=`<div class="profile-avatar">${p.emoji}</div><div class="profile-info"><div class="profile-name">${p.name}</div><div class="profile-detail">${total>0?`${good} ${t('correctOf')} ${total} ${t('good').toLowerCase()}`:`${t('notStarted')}`} · ${(p.sessions||[]).length} ${t('sessions')}</div></div><span style="color:var(--text3);font-size:.85rem">›</span>`;
+    item.innerHTML=`<div class="profile-avatar">${p.emoji}</div><div class="profile-info"><div class="profile-name">${p.name}</div><div class="profile-detail">${total>0?`${good} van ${total} sommen goed`:'Nog niet gestart'} · ${(p.sessions||[]).length} sessie(s)</div></div><span style="color:var(--text3);font-size:.85rem">›</span>`;
     item.onclick=()=>{if(deleteMode){toggleDeleteSelect(p.id,item)}else{selectProfile(p.id)}};
     list.appendChild(item)
   })
@@ -1185,8 +1174,6 @@ document.addEventListener('click',e=>{if(!document.getElementById('practice').cl
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/wijsthuis/service-worker.js').catch(()=>{})
 }
-currentLang=safeGet('hr_lang')||'nl';
-['nl','en'].forEach(l=>{const btn=document.getElementById(`lang-${l}`);if(btn)btn.style.opacity=l===currentLang?'1':'.4'});
 document.documentElement.setAttribute('data-theme',settings.theme||'dark');
 profile=profiles.find(p=>p.id===activeProfileId)||null;
 if(profile){if(!profile.sessions)profile.sessions=[];if(profile.seen===undefined)profile.seen=0;selectProfile(profile.id)}else showScreen('profiles-screen');
