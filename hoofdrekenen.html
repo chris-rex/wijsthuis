@@ -34,7 +34,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border-radius:20px;padding:1.5rem;width:100%;max-width:360px;box-shadow:0 8px 40px rgba(0,0,0,.4)}
 .modal h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem;text-align:center}
-.modal-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:.75rem 1rem;font-size:1rem;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s}
+.modal-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:.75rem 1rem;font-size:1rem;min-height:44px;color:var(--text);outline:none;font-family:inherit;transition:border-color .2s;-webkit-appearance:none}
 .modal-input:focus{border-color:var(--accent)}
 .emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;margin:.75rem 0}
 .emoji-opt{font-size:1.4rem;padding:.3rem;border-radius:10px;cursor:pointer;text-align:center;border:2px solid transparent;transition:all .15s}
@@ -251,7 +251,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
   <div class="stat-row">
     <div class="stat"><div class="stat-num" id="r-correct">—</div><div class="stat-label">Goed</div></div>
     <div class="stat"><div class="stat-num" id="r-time">—</div><div class="stat-label">Gem. tijd</div></div>
-    <div class="stat"><div class="stat-num" id="r-speed">—</div><div class="stat-label">Onder doel</div></div>
+    <div class="stat"><div class="stat-num" id="r-speed" style="color:var(--green)">—</div><div class="stat-label">Automatisch</div></div>
   </div>
   <div class="improved-badge" id="r-improved" style="display:none"></div>
   <div class="btn-stack">
@@ -408,7 +408,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3>Nieuw profiel</h3>
-    <input class="modal-input" id="modal-name" type="text" placeholder="Naam van het kind" maxlength="20">
+    <input class="modal-input" id="modal-name" type="text" placeholder="Naam van het kind" maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="words">
     <div class="emoji-grid" id="emoji-grid"></div>
     <div style="margin:.5rem 0">
       <div style="font-size:.8rem;font-weight:600;color:var(--text2);margin-bottom:.5rem">Leeftijd</div>
@@ -632,7 +632,13 @@ function openNewProfile(){
   EMOJIS.forEach(e=>{const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};eg.appendChild(btn)});
   selectProfileAge('jong');
   document.getElementById('modal').classList.add('open');
-  setTimeout(()=>document.getElementById('modal-name').focus(),100)
+  // iOS fix: kleine vertraging + expliciet focus + klik simulatie
+  setTimeout(()=>{
+    const inp=document.getElementById('modal-name');
+    inp.focus();
+    inp.click();
+    inp.readOnly=false;
+  },300)
 }
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function saveNewProfile(){
@@ -903,9 +909,9 @@ function toggleParentGuide(){
     <p style="margin-bottom:.5rem">🔁 <strong style="color:var(--text)">Herhaling op het juiste moment.</strong> Sommen die goed gaan komen steeds minder vaak terug, sommen die lastig zijn juist vaker. Zo onthoudt je kind ze langer.</p>
     <p style="margin-bottom:.5rem">✍️ <strong style="color:var(--text)">Zelf het antwoord ophalen.</strong> Het antwoord uit je hoofd halen versterkt het geheugen het meest. Daarom is zelf typen beter dan meerkeuze.</p>
     <p style="margin-bottom:.75rem">⚡ <strong style="color:var(--text)">Directe feedback.</strong> Meteen weten of iets goed is, helpt het leren.</p>
-    <p style="margin-bottom:.75rem">Het doel is dat rekenfeiten automatisch worden — zoals je je eigen naam weet, zonder nadenken. Onderzoek laat zien dat dit het werkgeheugen vrijmaakt voor moeilijkere sommen.</p>
+    <p style="margin-bottom:.75rem">Het doel is dat rekenfeiten automatisch worden, zoals je je eigen naam weet, zonder nadenken. Onderzoek laat zien dat dit het werkgeheugen vrijmaakt voor moeilijkere sommen.</p>
     <p style="margin-bottom:.5rem"><strong style="color:var(--text)">Belangrijk om te weten</strong></p>
-    <p style="margin-bottom:.75rem">De app traint automatiseren, niet begrip. Begrip — waaróm werkt rekenen zo? — moet ook ergens vandaan komen: van jou, van lesmateriaal, van concrete voorwerpen. De app is het sterkst als aanvulling op het echte leren.</p>
+    <p style="margin-bottom:.75rem">De app traint automatiseren, niet begrip. Begrip, waaróm werkt rekenen zo, moet ook ergens vandaan komen: van jou, van lesmateriaal, van concrete voorwerpen. De app is het sterkst als aanvulling op het echte leren.</p>
     <p style="margin-bottom:.5rem"><strong style="color:var(--text)">Tips voor thuis</strong></p>
     <p style="margin-bottom:.4rem">• Kort en vaak werkt het best: liever 5 minuten per dag dan een half uur in het weekend.</p>
     <p style="margin-bottom:.4rem">• Fouten horen erbij. Begin met meerkeuze bij nieuwe sommen, schakel daarna over op zelf typen.</p>
