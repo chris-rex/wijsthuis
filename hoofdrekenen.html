@@ -161,15 +161,19 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 
 <!-- PROFILES -->
 <div id="profiles-screen" class="screen active">
+  <div style="display:flex;gap:.5rem;align-self:flex-end;margin-bottom:.5rem">
+    <button id="lang-nl" onclick="setLang('nl')" style="background:none;border:none;cursor:pointer;font-size:1.3rem;opacity:1">🇳🇱</button>
+    <button id="lang-en" onclick="setLang('en')" style="background:none;border:none;cursor:pointer;font-size:1.3rem;opacity:.4">🇬🇧</button>
+  </div>
   <div class="profiles-logo"><img src="apple-touch-icon.png" width="72" height="72" style="display:block"></div>
-  <div class="profiles-title">Hoofdrekenen</div>
-  <div class="profiles-sub">Kies jouw profiel</div>
+  <div class="profiles-title" id="txt-appTitle">Hoofdrekenen</div>
+  <div class="profiles-sub" id="txt-chooseProfile">Kies jouw profiel</div>
   <div class="profile-list" id="profile-list"></div>
-  <button class="add-profile-btn" onclick="openNewProfile()">＋ Nieuw profiel aanmaken</button>
-  <button id="delete-mode-btn" class="danger-btn" style="font-size:.9rem;padding:.6rem 0;width:100%;text-align:center" onclick="toggleDeleteMode()">Profiel verwijderen</button>
+  <button class="add-profile-btn" onclick="openNewProfile()" id="txt-newProfile">＋ Nieuw profiel aanmaken</button>
+  <button id="delete-mode-btn" class="danger-btn" style="font-size:.9rem;padding:.6rem 0;width:100%;text-align:center" onclick="toggleDeleteMode()" id="txt-deleteProfile">Profiel verwijderen</button>
   <div id="delete-confirm-wrap" style="display:none;width:100%;flex-direction:column;gap:.4rem">
-    <button class="btn-primary" style="background:var(--red)" onclick="confirmDelete()">Verwijder geselecteerde profiel</button>
-    <button class="btn-secondary" onclick="cancelDeleteMode()">Annuleer</button>
+    <button class="btn-primary" style="background:var(--red)" onclick="confirmDelete()" id="txt-deleteConfirm">Verwijder geselecteerde profiel</button>
+    <button class="btn-secondary" onclick="cancelDeleteMode()" id="txt-cancel">Annuleer</button>
   </div>
 </div>
 
@@ -511,7 +515,172 @@ function getFullSet(g,sel){
   _setCache[key]=out;return out;
 }
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
+// ── TALEN ────────────────────────────────────────────────────────────────────
+const LANG={
+  nl:{
+    appTitle:'Hoofdrekenen',
+    appSub:'Snel en zeker — één som per keer',
+    chooseProfile:'Kies jouw profiel',
+    newProfile:'＋ Nieuw profiel aanmaken',
+    deleteProfile:'Profiel verwijderen',
+    deleteConfirm:'Verwijder geselecteerde profiel',
+    cancel:'Annuleer',
+    newProfileTitle:'Nieuw profiel',
+    namePlaceholder:'Naam van het kind',
+    age:'Leeftijd',
+    create:'Aanmaken',
+    group:'Groep',
+    practiceWhat:'Wat wil je oefenen?',
+    startBtn:'Begin oefenen',
+    progress:'Voortgang',
+    progressSub:'Sessies & overzicht',
+    settings:'Instellingen',
+    settingsSub:'Stopwatch & meer',
+    switchProfile:'Wissel profiel →',
+    back:'Terug',
+    display:'Weergave',
+    light:'☀️ Licht',
+    dark:'🌙 Donker',
+    stopwatch:'Stopwatch',
+    stopwatchSub:'Oplopende tijd per som',
+    countdown:'Afteltimer',
+    countdownSub:'Tijdsbalk met countdown',
+    countdownTime:'Afteltijd',
+    countdownTimeSub:'Seconden per som',
+    sessionCount:'Sommen per sessie',
+    multiChoice:'Meerkeuze',
+    multiChoiceSub:'4 grote knoppen i.p.v. typen',
+    autoCheck:'Automatisch controleren',
+    autoCheckSub:'Direct goed/fout zonder OK',
+    sound:'Geluid',
+    ageLabel:'Leeftijd',
+    ageSub:'Past tijdsgrenzen automatisch aan',
+    autoUnder:'Automatisch onder',
+    autoUnderSub:'Seconden voor groene blokjes',
+    goodUnder:'Goed onder',
+    goodUnderSub:'Seconden voor gele blokjes',
+    parentGuide:'💡 Voor ouders: hoe werkt het?',
+    parentGuideSub:'Tik voor uitleg en tips',
+    backupMake:'Back-up maken',
+    backupMakeSub:'Sla alle profielen op als bestand',
+    backupRestore:'Back-up terugzetten',
+    backupRestoreSub:'Herstel profielen uit een bestand',
+    export:'Exporteer',
+    import:'Importeer',
+    clearProgress:'Voortgang wissen',
+    clearProgressSub:'Alleen voor huidig profiel',
+    clear:'Wis',
+    levelPerGroup:'Niveau per groep',
+    viewGroup:'Groep bekijken',
+    sessionHistory:'Sessie geschiedenis',
+    noSessions:'Nog geen sessies gespeeld',
+    slow:'Langzaam',
+    practice:'Oefenen',
+    automatic:'Automatisch',
+    new:'Nieuw',
+    tips:'Rekentrucjes',
+    tipsSub:'Handige manieren om sneller te rekenen',
+    tipsIntro:'Deze trucjes helpen je op weg als je vastloopt. Door veel te oefenen ga je de sommen vanzelf uit je hoofd kennen, dan heb je de trucjes niet meer nodig!',
+    good:'Goed',
+    avgTime:'Gem. tijd',
+    again:'Opnieuw',
+    viewProgress:'Voortgang bekijken',
+    menu:'Menu',
+    notStarted:'Nog niet gestart',
+    sessions:'sessie(s)',
+    correctOf:'van',
+    readyFor:'Klaar voor groep',
+    notPracticed:'Nog niet geoefend',
+  },
+  en:{
+    appTitle:'Mental Math',
+    appSub:'Fast and sure — one sum at a time',
+    chooseProfile:'Choose your profile',
+    newProfile:'＋ Create new profile',
+    deleteProfile:'Delete profile',
+    deleteConfirm:'Delete selected profile',
+    cancel:'Cancel',
+    newProfileTitle:'New profile',
+    namePlaceholder:"Child's name",
+    age:'Age',
+    create:'Create',
+    group:'Level',
+    practiceWhat:'What do you want to practice?',
+    startBtn:'Start practicing',
+    progress:'Progress',
+    progressSub:'Sessions & overview',
+    settings:'Settings',
+    settingsSub:'Stopwatch & more',
+    switchProfile:'Switch profile →',
+    back:'Back',
+    display:'Display',
+    light:'☀️ Light',
+    dark:'🌙 Dark',
+    stopwatch:'Stopwatch',
+    stopwatchSub:'Elapsed time per sum',
+    countdown:'Countdown timer',
+    countdownSub:'Timer bar with countdown',
+    countdownTime:'Countdown time',
+    countdownTimeSub:'Seconds per sum',
+    sessionCount:'Sums per session',
+    multiChoice:'Multiple choice',
+    multiChoiceSub:'4 large buttons instead of typing',
+    autoCheck:'Auto check',
+    autoCheckSub:'Instant right/wrong without OK',
+    sound:'Sound',
+    ageLabel:'Age',
+    ageSub:'Automatically adjusts time limits',
+    autoUnder:'Automatic under',
+    autoUnderSub:'Seconds for green blocks',
+    goodUnder:'Good under',
+    goodUnderSub:'Seconds for yellow blocks',
+    parentGuide:"💡 For parents: how does it work?",
+    parentGuideSub:'Tap for explanation and tips',
+    backupMake:'Create backup',
+    backupMakeSub:'Save all profiles as a file',
+    backupRestore:'Restore backup',
+    backupRestoreSub:'Restore profiles from a file',
+    export:'Export',
+    import:'Import',
+    clearProgress:'Clear progress',
+    clearProgressSub:'Only for current profile',
+    clear:'Clear',
+    levelPerGroup:'Level per group',
+    viewGroup:'View group',
+    sessionHistory:'Session history',
+    noSessions:'No sessions played yet',
+    slow:'Slow',
+    practice:'Practice',
+    automatic:'Automatic',
+    new:'New',
+    tips:'Math tricks',
+    tipsSub:'Handy ways to calculate faster',
+    tipsIntro:'These tricks help you when you get stuck. With lots of practice you will know the answers automatically, and you will not need the tricks anymore!',
+    good:'Correct',
+    avgTime:'Avg. time',
+    again:'Again',
+    viewProgress:'View progress',
+    menu:'Menu',
+    notStarted:'Not started yet',
+    sessions:'session(s)',
+    correctOf:'of',
+    readyFor:'Ready for level',
+    notPracticed:'Not practiced yet',
+  }
+};
+
+let currentLang='nl';
+function t(key){return LANG[currentLang][key]||LANG.nl[key]||key}
+function setLang(lang){
+  currentLang=lang;
+  safeSet('hr_lang',lang);
+  ['nl','en'].forEach(l=>{
+    const btn=document.getElementById(`lang-${l}`);
+    if(btn)btn.style.opacity=l===lang?'1':'.4';
+  });
+  if(profile)renderHome();
+  else renderProfiles();
+}
 function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function fmtTime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60);return`${m}:${String(s%60).padStart(2,'0')}`}
@@ -584,12 +753,19 @@ function sessionLevel(pct){if(pct>=.9)return{label:'Uitstekend',cls:'uitstekend'
 
 // ── PROFILES ──────────────────────────────────────────────────────────────────
 function renderProfiles(){
+  // Update statische teksten
+  document.getElementById('txt-appTitle').textContent=t('appTitle');
+  document.getElementById('txt-chooseProfile').textContent=t('chooseProfile');
+  document.getElementById('txt-newProfile').textContent=t('newProfile');
+  document.getElementById('txt-deleteProfile').textContent=t('deleteProfile');
+  document.getElementById('txt-deleteConfirm').textContent=t('deleteConfirm');
+  document.getElementById('txt-cancel').textContent=t('cancel');
   const list=document.getElementById('profile-list');list.innerHTML='';
   profiles.forEach(p=>{
     const total=Object.keys(p.progress||{}).length;
     const good=Object.values(p.progress||{}).filter(v=>v.count>0&&v.correct/v.count>=.8).length;
     const item=document.createElement('div');item.className='profile-item'+(p.id===activeProfileId?' active-profile':'');
-    item.innerHTML=`<div class="profile-avatar">${p.emoji}</div><div class="profile-info"><div class="profile-name">${p.name}</div><div class="profile-detail">${total>0?`${good} van ${total} sommen goed`:'Nog niet gestart'} · ${(p.sessions||[]).length} sessie(s)</div></div><span style="color:var(--text3);font-size:.85rem">›</span>`;
+    item.innerHTML=`<div class="profile-avatar">${p.emoji}</div><div class="profile-info"><div class="profile-name">${p.name}</div><div class="profile-detail">${total>0?`${good} ${t('correctOf')} ${total} ${t('good').toLowerCase()}`:`${t('notStarted')}`} · ${(p.sessions||[]).length} ${t('sessions')}</div></div><span style="color:var(--text3);font-size:.85rem">›</span>`;
     item.onclick=()=>{if(deleteMode){toggleDeleteSelect(p.id,item)}else{selectProfile(p.id)}};
     list.appendChild(item)
   })
@@ -1009,6 +1185,8 @@ document.addEventListener('click',e=>{if(!document.getElementById('practice').cl
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/wijsthuis/service-worker.js').catch(()=>{})
 }
+currentLang=safeGet('hr_lang')||'nl';
+['nl','en'].forEach(l=>{const btn=document.getElementById(`lang-${l}`);if(btn)btn.style.opacity=l===currentLang?'1':'.4'});
 document.documentElement.setAttribute('data-theme',settings.theme||'dark');
 profile=profiles.find(p=>p.id===activeProfileId)||null;
 if(profile){if(!profile.sessions)profile.sessions=[];if(profile.seen===undefined)profile.seen=0;selectProfile(profile.id)}else showScreen('profiles-screen');
