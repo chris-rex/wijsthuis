@@ -408,7 +408,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3>Nieuw profiel</h3>
-    <input class="modal-input" id="modal-name" type="text" placeholder="Naam van het kind" maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="words">
+    <input class="modal-input" id="modal-name" type="text" placeholder="Naam van het kind" maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="words" inputmode="text">
     <div class="emoji-grid" id="emoji-grid"></div>
     <div style="margin:.5rem 0">
       <div style="font-size:.8rem;font-weight:600;color:var(--text2);margin-bottom:.5rem">Leeftijd</div>
@@ -632,13 +632,14 @@ function openNewProfile(){
   EMOJIS.forEach(e=>{const btn=document.createElement('div');btn.className='emoji-opt'+(e===selectedEmoji?' sel':'');btn.textContent=e;btn.onclick=()=>{selectedEmoji=e;eg.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel')};eg.appendChild(btn)});
   selectProfileAge('jong');
   document.getElementById('modal').classList.add('open');
-  // iOS fix: kleine vertraging + expliciet focus + klik simulatie
+  // iOS fix: input moet readonly zijn tot na de tap, dan focus
+  const inp=document.getElementById('modal-name');
+  inp.setAttribute('readonly','readonly');
   setTimeout(()=>{
-    const inp=document.getElementById('modal-name');
+    inp.removeAttribute('readonly');
     inp.focus();
     inp.click();
-    inp.readOnly=false;
-  },300)
+  },200)
 }
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 function saveNewProfile(){
@@ -949,7 +950,7 @@ function renderProgressScreen(){
     if(nieuw===total)return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:var(--text3)">—</div></div><div style="font-size:.68rem;color:var(--text3);margin-top:4px">Nog niet geoefend · ${total} sommen</div></div>`;
     const pct=Math.round(groen/total*100);
     const barColor=pct>=80?'var(--green)':pct>=40?'var(--amber)':'var(--red)';
-    const readyBadge=pct>=80&&n<8?`<div style="font-size:.68rem;font-weight:600;color:var(--green);background:rgba(48,209,88,.12);border-radius:100px;padding:.2rem .7rem;display:inline-block;margin-top:.4rem">🎉 Klaar voor groep ${n+1}!</div>`:'';
+    const readyBadge=pct>=90&&n<8?`<div style="font-size:.68rem;font-weight:600;color:var(--green);background:rgba(48,209,88,.12);border-radius:100px;padding:.2rem .7rem;display:inline-block;margin-top:.4rem">🎉 Klaar voor groep ${n+1}!</div>`:'';
     return`<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.85rem 1rem;box-shadow:var(--shadow-sm)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem"><div style="font-size:.85rem;font-weight:600">Groep ${n} <span style="font-size:.72rem;color:var(--text2);font-weight:400">${GROUPS[n].sub}</span></div><div style="font-size:.85rem;font-weight:700;color:${barColor}">${pct}%</div></div><div style="height:6px;background:var(--surface2);border-radius:3px;overflow:hidden"><div style="height:6px;width:${pct}%;background:${barColor};border-radius:3px"></div></div><div style="font-size:.68rem;color:var(--text3);margin-top:.4rem">🟢 ${groen} · 🟡 ${geel} · ⬜ ${nieuw} van ${total}</div>${readyBadge}</div>`
   }).join('');
   document.getElementById('level-row').innerHTML=levelHTML;
@@ -1005,6 +1006,9 @@ document.getElementById('hidden-input').addEventListener('input',function(){cons
 document.addEventListener('click',e=>{if(!document.getElementById('practice').classList.contains('active'))return;if(!settings.mc&&!e.target.classList.contains('np')&&!e.target.classList.contains('back-btn'))setTimeout(focusInput,50)});
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/wijsthuis/service-worker.js').catch(()=>{})
+}
 document.documentElement.setAttribute('data-theme',settings.theme||'dark');
 profile=profiles.find(p=>p.id===activeProfileId)||null;
 if(profile){if(!profile.sessions)profile.sessions=[];if(profile.seen===undefined)profile.seen=0;selectProfile(profile.id)}else showScreen('profiles-screen');

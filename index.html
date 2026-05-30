@@ -75,6 +75,9 @@ section{padding:5rem 2rem}
   .phone{width:220px;height:450px}
 }
 
+.faq-body{display:none;padding:0 1.25rem 1.1rem;font-size:.88rem;color:var(--text2);line-height:1.7;border-top:1px solid var(--border)}
+.faq-body.open{display:block}
+
 .groups-wrap{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06);border:1px solid var(--border);margin-top:3rem}
 .group-row{display:flex;align-items:center;padding:1rem 1.5rem;border-bottom:1px solid var(--border);transition:background .2s}
 .group-row:last-child{border-bottom:none}
@@ -363,7 +366,7 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--text3);border-
     <p class="section-sub">De app past zich aan op jouw kind.</p>
     <div class="smart-box">
       <p>De app onthoudt welke sommen goed gaan en welke nog lastig zijn. Sommen die fout of traag gaan komen vaker terug, sommen die snel goed gaan minder vaak. Zo oefent je kind precies wat nodig is, elke keer weer.</p>
-      <p style="margin-top:.75rem;color:#1d3a5f;">Zijn de meeste blokjes groen? Dan is je kind klaar voor de volgende groep.</p>
+      <p style="margin-top:.75rem;color:#1d3a5f;">Staan 90% of meer van de blokjes groen? Dan is je kind klaar voor de volgende groep.</p>
       <p style="margin-top:.75rem;color:#1d3a5f;">De app is geen vervanging voor de rekenles, maar een gerichte aanvulling voor de sommen die nog niet automatisch gaan.</p>
     </div>
     <div class="pills">
@@ -431,6 +434,97 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--text3);border-
   </div>
 </section>
 
+<!-- FAQ -->
+<section>
+  <div class="container reveal">
+    <div class="section-label">Veelgestelde vragen</div>
+    <h2 class="section-title">FAQ</h2>
+    <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:2rem">
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Is de app gratis?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Ja, volledig gratis en zonder reclame.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Moet ik een account aanmaken?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Nee, je maakt alleen een profiel aan op het apparaat zelf. Geen e-mailadres of wachtwoord nodig.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Werkt de app zonder internet?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Ja! Zodra je de app één keer hebt geopend, slaat hij zichzelf op op je apparaat. Daarna werkt hij ook zonder internetverbinding.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Kunnen meerdere kinderen de app gebruiken?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Ja, via aparte profielen. Elk kind heeft zijn eigen voortgang en instellingen.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Kan ik de app op meerdere apparaten gebruiken?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">De voortgang wordt opgeslagen op het apparaat zelf. Wil je hem op een ander apparaat gebruiken? Exporteer je profiel via Instellingen en importeer hem op het andere apparaat.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Verdwijnt de voortgang als ik de app verwijder?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Ja, de voortgang wordt lokaal opgeslagen op het apparaat. Maak daarom regelmatig een back-up via Instellingen, dan ben je nooit iets kwijt.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Voor welke leeftijd is de app geschikt?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">De app is geschikt voor kinderen van groep 2 t/m 8, dus van ongeveer 5 tot 12 jaar.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Hoe weet ik wanneer mijn kind klaar is voor de volgende groep?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Als 90% of meer van de blokjes groen zijn in de voortgang. Dat betekent dat je kind de sommen automatisch beheerst en klaar is voor de volgende stap.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Wat is het verschil tussen meerkeuze en zelf typen?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">Meerkeuze is de opstap bij nieuwe sommen, je kind kiest uit vier antwoorden en leert de sommen herkennen. Zelf typen is de volgende stap, het antwoord zelf ophalen uit het geheugen versterkt het leren het meest.</div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.06)">
+        <div onclick="toggleFaq(this)" style="padding:1.1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem">
+          <div style="font-size:.95rem;font-weight:600">Welke wetenschap zit er achter de app?</div>
+          <span style="color:var(--text3);font-size:1.1rem;flex-shrink:0">+</span>
+        </div>
+        <div class="faq-body">De app is gebouwd op drie bewezen leerprincipes: retrieval practice (zelf het antwoord ophalen versterkt het geheugen), spaced repetition (herhaling op het juiste moment zorgt voor langetermijngeheugen) en directe feedback. Dit zijn technieken die al decennialang worden onderzocht in de cognitieve psychologie en aantoonbaar werken voor het automatiseren van rekenfeiten.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA BOTTOM -->
 <div class="cta-section">
   <h2>Klaar om te beginnen?</h2>
@@ -443,6 +537,14 @@ footer{text-align:center;padding:2rem;font-size:.8rem;color:var(--text3);border-
 </footer>
 
 <script>
+function toggleFaq(el){
+  const body=el.nextElementSibling;
+  const icon=el.querySelector('span');
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  icon.textContent=isOpen?'+':'−';
+}
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
 }, {threshold: 0.12});
