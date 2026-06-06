@@ -477,7 +477,10 @@ function genSet(g,optId){
     if(optId==='t5'){for(let a=1;a<=10;a++)add(`${a} × 5`,a*5)}
     if(optId==='t10'){for(let a=1;a<=10;a++)add(`${a} × 10`,a*10)}
   }
-  if(g===5){const t=parseInt(optId.slice(1));for(let a=1;a<=10;a++)add(`${a} × ${t}`,a*t);for(let a=1;a<=10;a++)add(`${a*t} ÷ ${t}`,a)}
+  if(g===5){
+    if(optId.startsWith('t')){const t=parseInt(optId.slice(1));for(let a=1;a<=10;a++)add(`${a} × ${t}`,a*t)}
+    if(optId.startsWith('d')){const t=parseInt(optId.slice(1));for(let a=1;a<=10;a++)add(`${a*t} ÷ ${t}`,a)}
+  }
   if(g===6){
     if(optId==='add'){[[120,30],[250,40],[340,60],[450,150],[210,90],[170,80],[330,170],[260,140],[480,120],[150,250],[370,30],[290,110]].forEach(([a,b])=>add(`${a} + ${b}`,a+b))}
     if(optId==='mul'){for(let a=11;a<=19;a++)for(let b=2;b<=9;b++)add(`${a} × ${b}`,a*b)}
@@ -496,7 +499,10 @@ const GROUPS={
   2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min']},
   3:{sub:'Tot 20',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'},{id:'dub',label:'Dubbelen'}],defaultSel:['plus','min']},
   4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus','min','t2','t5','t10']},
-  5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),defaultSel:['t2','t3','t4','t5','t6','t7','t8','t9','t10']},
+  5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[
+    ...[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),
+    ...[2,3,4,5,6,7,8,9,10].map(n=>({id:`d${n}`,label:`÷ ${n}`}))
+  ],defaultSel:['t2','t3','t4','t5','t6','t7','t8','t9','t10']},
   6:{sub:'Groot+breuken',optLabel:'Rekenen met',options:[{id:'add',label:'+ groot'},{id:'mul',label:'× gemengd'},{id:'frac',label:'Breuken'}],defaultSel:['add','mul','frac']},
   7:{sub:'%, komma',optLabel:'Rekenen met',options:[{id:'pct',label:'Procenten'},{id:'dec',label:'Komma'},{id:'frac',label:'Breuken'}],defaultSel:['pct','dec','frac']},
   8:{sub:'Gemengd',optLabel:'Oefenen met',options:[{id:'g3',label:'Gr. 3'},{id:'g4',label:'Gr. 4'},{id:'g5',label:'Tafels'},{id:'g6',label:'Groot'},{id:'g7',label:'%,komma'}],defaultSel:['g3','g4','g5','g6','g7']}
