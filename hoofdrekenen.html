@@ -819,7 +819,9 @@ function saveNewProfile(){
   const p=defProfile(name,selectedEmoji);
   p.age=selectedAge;p.tAuto=AGE_MAP[selectedAge].tAuto;p.tGoed=AGE_MAP[selectedAge].tGoed;
   profiles.push(p);saveProfiles();
-  settings.tAuto=p.tAuto;settings.tGoed=p.tGoed;settings.age=selectedAge;saveSettings();
+  settings.tAuto=p.tAuto;settings.tGoed=p.tGoed;settings.age=selectedAge;
+  settings.sessionCount=10;
+  saveSettings();
   closeModal();renderProfiles();selectProfile(p.id)
 }
 document.getElementById('modal-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveNewProfile()});
