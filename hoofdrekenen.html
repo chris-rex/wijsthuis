@@ -433,7 +433,7 @@ const AGE_MAP={jong:{tAuto:5,tGoed:8},mid:{tAuto:3,tGoed:6},oud:{tAuto:2,tGoed:4
 const BOX_DELAY={1:0,2:3,3:8,4:20,5:45};
 
 const KID_TIPS=[
-  {cat:'Optellen & aftrekken',items:[
+  {cat:'Groep 2 & 3 — Optellen & aftrekken',groepen:[2,3],items:[
     {emoji:'🤝',titel:'Vriendjes van 10',tekst:'Leer welke getallen samen 10 maken: 1+9, 2+8, 3+7, 4+6, 5+5. Deze ken je het liefst uit je hoofd, je hebt ze overal voor nodig!'},
     {emoji:'🔟',titel:'Maak eerst 10',tekst:'Bij 8 + 5: pak er eerst 2 bij om 10 te maken (8 + 2 = 10), tel dan de rest erbij (10 + 3 = 13).'},
     {emoji:'🔄',titel:'Omdraaien mag',tekst:'3 + 9 is net zo veel als 9 + 3. Begin met het grootste getal, dan hoef je minder te tellen!'},
@@ -441,7 +441,7 @@ const KID_TIPS=[
     {emoji:'👥',titel:'Buurman-sommen',tekst:'Als je 6 + 6 = 12 weet, dan is 6 + 7 gewoon één meer: 13. En 6 + 5 is één minder: 11.'},
     {emoji:'⬇️',titel:'Aftrekken door verder tellen',tekst:'12 − 9? Tel vanaf 9 omhoog tot 12: dat zijn 3 stapjes. Het antwoord is 3!'}
   ]},
-  {cat:'Tafels & delen',items:[
+  {cat:'Groep 4 & 5 — Tafels & delen',groepen:[4,5],items:[
     {emoji:'✌️',titel:'Tafel van 2 = dubbelen',tekst:'Keer 2 is gewoon dubbel. 7 × 2 is hetzelfde als 7 + 7 = 14.'},
     {emoji:'4️⃣',titel:'Tafel van 4 = dubbel verdubbelen',tekst:'7 × 4? Doe eerst 7 × 2 = 14, en verdubbel dat: 14 + 14 = 28.'},
     {emoji:'🖐️',titel:'Tafel van 5',tekst:'De tafel van 5 eindigt altijd op 0 of 5: 5, 10, 15, 20... En 5 is de helft van 10, dus 6 × 5 = de helft van 6 × 10 = 30.'},
@@ -449,11 +449,15 @@ const KID_TIPS=[
     {emoji:'🔟',titel:'Tafel van 10',tekst:'Bij keer 10 zet je er gewoon een 0 achter. 7 × 10 = 70!'},
     {emoji:'➗',titel:'Delen is omgekeerd keer',tekst:'20 ÷ 4? Denk: hoe vaak past 4 in 20? 4 × 5 = 20, dus het antwoord is 5.'}
   ]},
-  {cat:'Grote getallen & meer',items:[
+  {cat:'Groep 6, 7 & 8 — Grote getallen, breuken & procenten',groepen:[6,7,8],items:[
     {emoji:'🧮',titel:'Splits grote sommen',tekst:'34 + 25? Doe eerst de tientallen (30 + 20 = 50), dan de eenheden (4 + 5 = 9), samen 59.'},
     {emoji:'🎯',titel:'Afronden en compenseren',tekst:'58 + 7? Doe 60 + 7 = 67, en haal er de 2 weer af die je te veel pakte: 65.'},
+    {emoji:'➕',titel:'Optellen via tientallen',tekst:'247 + 38? Doe 247 + 30 = 277, dan + 8 = 285.'},
+    {emoji:'↔️',titel:'Aftrekken via aanvullen',tekst:'200 − 147? Tel van 147 naar 200: 3 + 50 = 53.'},
+    {emoji:'🍕',titel:'Breuken visualiseren',tekst:'¾ betekent: deel in 4 stukken, neem er 3. Stel je altijd een taart voor!'},
     {emoji:'💯',titel:'Procenten via 10%',tekst:'10% is makkelijk: streep één nul weg. 10% van 80 = 8. Wil je 20%? Dan keer 2: 16.'},
-    {emoji:'½',titel:'De helft is 50%',tekst:'50% van iets is gewoon de helft. 50% van 60 = 30. En 25% is de helft daarvan: 15.'}
+    {emoji:'½',titel:'75% = drie kwart',tekst:'75% van 80? Eerst de helft (40), dan nog een kwart erbij (20) = 60.'},
+    {emoji:'🔀',titel:'Procenten omdraaien',tekst:'4% van 75 is hetzelfde als 75% van 4 = 3. Soms is de omgekeerde volgorde veel makkelijker!'}
   ]}
 ];
 

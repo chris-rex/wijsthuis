@@ -1,4 +1,4 @@
-const CACHE = 'hoofdrekenen-v4';
+const CACHE = 'hoofdrekenen-v5';
 const FILES = [
   '/wijsthuis/hoofdrekenen.html',
   '/wijsthuis/apple-touch-icon.png'
