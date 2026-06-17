@@ -442,6 +442,8 @@ const KID_TIPS=[
     {emoji:'⬇️',titel:'Aftrekken door verder tellen',tekst:'12 − 9? Tel vanaf 9 omhoog tot 12: dat zijn 3 stapjes. Het antwoord is 3!'}
   ]},
   {cat:'Groep 4 & 5 — Tafels & delen',groepen:[4,5],items:[
+    {emoji:'🧮',titel:'Splits grote sommen',tekst:'34 + 25? Doe eerst de tientallen (30 + 20 = 50), dan de eenheden (4 + 5 = 9), samen 59.'},
+    {emoji:'🎯',titel:'Afronden en compenseren',tekst:'58 + 7? Doe 60 + 7 = 67, en haal er de 2 weer af die je te veel pakte: 65.'},
     {emoji:'✌️',titel:'Tafel van 2 = dubbelen',tekst:'Keer 2 is gewoon dubbel. 7 × 2 is hetzelfde als 7 + 7 = 14.'},
     {emoji:'4️⃣',titel:'Tafel van 4 = dubbel verdubbelen',tekst:'7 × 4? Doe eerst 7 × 2 = 14, en verdubbel dat: 14 + 14 = 28.'},
     {emoji:'🖐️',titel:'Tafel van 5',tekst:'De tafel van 5 eindigt altijd op 0 of 5: 5, 10, 15, 20... En 5 is de helft van 10, dus 6 × 5 = de helft van 6 × 10 = 30.'},
@@ -450,8 +452,6 @@ const KID_TIPS=[
     {emoji:'➗',titel:'Delen is omgekeerd keer',tekst:'20 ÷ 4? Denk: hoe vaak past 4 in 20? 4 × 5 = 20, dus het antwoord is 5.'}
   ]},
   {cat:'Groep 6, 7 & 8 — Grote getallen, breuken & procenten',groepen:[6,7,8],items:[
-    {emoji:'🧮',titel:'Splits grote sommen',tekst:'34 + 25? Doe eerst de tientallen (30 + 20 = 50), dan de eenheden (4 + 5 = 9), samen 59.'},
-    {emoji:'🎯',titel:'Afronden en compenseren',tekst:'58 + 7? Doe 60 + 7 = 67, en haal er de 2 weer af die je te veel pakte: 65.'},
     {emoji:'➕',titel:'Optellen via tientallen',tekst:'247 + 38? Doe 247 + 30 = 277, dan + 8 = 285.'},
     {emoji:'↔️',titel:'Aftrekken via aanvullen',tekst:'200 − 147? Tel van 147 naar 200: 3 + 50 = 53.'},
     {emoji:'🍕',titel:'Breuken visualiseren',tekst:'¾ betekent: deel in 4 stukken, neem er 3. Stel je altijd een taart voor!'},
@@ -475,6 +475,8 @@ function genSet(g,optId){
     if(optId==='dub'){for(let a=2;a<=10;a++)add(`${a} + ${a}`,2*a)}
   }
   if(g===4){
+    if(optId==='plus50'){for(let a=10;a<=40;a+=5)for(let b=5;a+b<=50;b+=5)add(`${a} + ${b}`,a+b)}
+    if(optId==='min50'){for(let a=15;a<=50;a+=5)for(let b=5;b<a;b+=5)add(`${a} − ${b}`,a-b)}
     if(optId==='plus'){for(let a=10;a<=80;a+=5)for(let b=5;a+b<=99;b+=5)add(`${a} + ${b}`,a+b)}
     if(optId==='min'){for(let a=20;a<=99;a+=7)for(let b=5;b<a;b+=7)add(`${a} − ${b}`,a-b)}
     if(optId==='t2'){for(let a=1;a<=10;a++)add(`${a} × 2`,a*2)}
@@ -502,7 +504,7 @@ function genSet(g,optId){
 const GROUPS={
   2:{sub:'Tot 10',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'}],defaultSel:['plus','min']},
   3:{sub:'Tot 20',optLabel:'Rekenen met',options:[{id:'plus',label:'+ optellen'},{id:'min',label:'− aftrekken'},{id:'dub',label:'Dubbelen'}],defaultSel:['plus','min']},
-  4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus','min','t2','t5','t10']},
+  4:{sub:'100 + tafels',optLabel:'Rekenen met',options:[{id:'plus50',label:'+ tot 50'},{id:'min50',label:'− tot 50'},{id:'plus',label:'+ tot 100'},{id:'min',label:'− tot 100'},{id:'t2',label:'× 2'},{id:'t5',label:'× 5'},{id:'t10',label:'× 10'}],defaultSel:['plus50','min50','t2','t5','t10']},
   5:{sub:'Alle tafels',optLabel:'Welke tafels?',options:[
     ...[2,3,4,5,6,7,8,9,10].map(n=>({id:`t${n}`,label:`× ${n}`})),
     ...[2,3,4,5,6,7,8,9,10].map(n=>({id:`d${n}`,label:`÷ ${n}`}))
@@ -700,7 +702,7 @@ function saveProfiles(){safeSet('hr_profiles',JSON.stringify(profiles))}
 function loadSettings(){try{return JSON.parse(safeGet('hr_settings'))||defSettings()}catch{return defSettings()}}
 function saveSettings(){safeSet('hr_settings',JSON.stringify(settings))}
 function defSettings(){return{sw:true,cd:false,cdSec:10,sessionCount:10,mc:false,auto:true,numpad:true,sound:true,theme:'dark',tAuto:5,tGoed:8,age:'jong'}}
-function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus','min','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[],seen:0}}
+function defProfile(name,emoji){return{id:Date.now().toString(),name,emoji,group:2,groupSel:{2:['plus','min'],3:['plus','min'],4:['plus50','min50','t2','t5','t10'],5:['t2','t3','t4','t5','t6','t7','t8','t9','t10'],6:['add','mul','frac'],7:['pct','dec','frac'],8:['g3','g4','g5','g6','g7']},progress:{},sessions:[],seen:0}}
 
 // ── BACKUP ────────────────────────────────────────────────────────────────────
 function exportData(){
