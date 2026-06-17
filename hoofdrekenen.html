@@ -99,11 +99,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
 .cd-bar-bg{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .cd-bar-fill{height:4px;background:var(--amber);border-radius:2px;width:100%}
 .cd-label{font-size:.72rem;color:var(--amber);font-weight:600;font-variant-numeric:tabular-nums}
-#numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;width:100%;max-width:260px}
-.np{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.9rem;font-size:1.25rem;font-weight:500;color:var(--text);cursor:pointer;text-align:center;user-select:none;box-shadow:var(--shadow-sm);transition:transform .1s,background .1s;-webkit-tap-highlight-color:transparent}
+#numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;width:100%;max-width:320px}
+.np{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.1rem;font-size:1.5rem;font-weight:500;color:var(--text);cursor:pointer;text-align:center;user-select:none;box-shadow:var(--shadow-sm);transition:transform .1s,background .1s;-webkit-tap-highlight-color:transparent;min-height:64px;display:flex;align-items:center;justify-content:center}
 .np:active{background:var(--surface2);transform:scale(.93)}
-.np.np-del{font-size:1rem;color:var(--text2)}
-.np.np-ok{background:var(--accent);color:#fff;border-color:transparent;font-size:.9rem;font-weight:600}
+.np.np-del{font-size:1.2rem;color:var(--text2)}
+.np.np-ok{background:var(--accent);color:#fff;border-color:transparent;font-size:1rem;font-weight:600}
 #results{gap:1.5rem;padding:2rem 1rem}
 .result-msg{text-align:center;font-size:1rem;color:var(--text2);line-height:1.5;background:var(--surface);border-radius:14px;padding:1rem;border:1px solid var(--border);width:100%}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;width:100%}
