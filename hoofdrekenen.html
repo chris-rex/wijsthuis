@@ -430,7 +430,7 @@ input:checked+.tog-track:before{transform:translateX(20px)}
 // ── CONSTANTEN ────────────────────────────────────────────────────────────────
 const EMOJIS=['🧒','👦','👧','🧑','👩','👨','🦊','🐻','🐼','🦁','🐯','🐸','🦋','⭐','🚀','🎮','🎨','🏆'];
 const AGE_MAP={jong:{tAuto:5,tGoed:8},mid:{tAuto:3,tGoed:6},oud:{tAuto:2,tGoed:4}};
-const BOX_DELAY={1:0,2:3,3:8,4:20,5:45};
+const BOX_DELAY={1:2,2:3,3:8,4:20,5:45};
 
 const KID_TIPS=[
   {cat:'Groep 2 & 3 — Optellen & aftrekken',groepen:[2,3],items:[
@@ -843,8 +843,9 @@ function buildSession(g,sel,count){
     const sinceSeen=now-(p.lastSeen===-999?-9999:p.lastSeen);
     const due=sinceSeen>=delay;
     let prio;
-    if(!p.count)prio=100;
-    else if(box<=2)prio=80;
+    if(box===1)prio=120;
+    else if(!p.count)prio=100;
+    else if(box===2)prio=90;
     else prio=Math.min(60,sinceSeen-delay);
     return{s,due,prio}
   });
